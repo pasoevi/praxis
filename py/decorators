@@ -1,0 +1,28 @@
+What I have learned today about decorators in python.
+
+You have to define a function which wraps the other function, that is,
+it takes it as an argument, constructs a new function and then
+returns. The syntax for actual wrapping is as follows:
+
+# A decorator function
+def trace(f):
+    def helper(x):
+    	print("calling {0} for {1}".format(f.__name__, x)
+	result = f(x)
+	return result
+    return helper
+
+
+# The function you want to be decorated
+
+@trace
+def square(x):
+    return x * x
+
+
+There is some more I could read about the decorators, but I do not
+feel like it. It must be quite useful though, to decorate the
+functions using the classes, that would help you to call decorators
+with arguments which apply to them, not to the function being
+decorated. Also, that way you can send more than one positional
+arguments to the function being called. 

@@ -1,0 +1,105 @@
+* IO
+
+putc is usually the best function to use for writing a single
+character. 
+putchar 
+fputs
+puts writes out to stdout, adds newline. o
+puts is the most convenient function for writing simple messages. 
+
+Character input
+
+* Declarations
+C has an awkward manner of combining types.
+* Line-Oriented Input
+
+A nonstandard /getline/ function makes it easy to read lines
+reliably. 
+
+Another Gnu extension getdelim generalizes getline, it reads a
+delimited record defined as everything through the next occurence of
+a specified delimiter character. 
+
+     #+BEGIN_EXAMPLE
+     size_t getline(**lineptr, size_t *n, FILE *stream)
+     #+END_EXAMPLE
+
+This function reads an entire line from /stream/, storing the text
+(including a newline and a terminating null character in a buffer
+and storing the buffer address in *lineptr. 
+
+     Before calling `getline', you should place in `*LINEPTR' the
+     address of a buffer `*N' bytes long, allocated with `malloc'.  If
+     this buffer is long enough to hold the line, `getline' stores the
+     line in this buffer.  Otherwise, `getline' makes the buffer bigger
+     using `realloc', storing the new buffer address back in `*LINEPTR'
+     and the increased size back in `*N'.  *Note Unconstrained
+     Allocation::.
+
+* The things I still have to learn about C
+
+- function pointers. I know how they work, I know how to use them. I
+  just have to - use them.
+  return_type (*var_name) (param_types)
+
+- variadic functions.
+
+
+* GDB
+
+** Cheat sheet
+
+*** Breakpoints
+
+break some_function
+break some_file.c:120
+break 12
+
+disable 12 
+del 12
+
+*** Program execution
+run arg1 arg2
+
+- s (step): step one line, even if that means entering another function.
+- n: next line, but do not enter sub-functions and possibly back up to
+the head of the loop.
+- u: until the next line forward from this (so let an already visited
+  loop run through until forward progress)
+- c: continue until the next breakpoint or the end of the program.
+
+ret return from the current function immediately, perhaps with a
+return value like ret 0
+
+To make a more global move, issue `j', which takes you to any line.
+
+@ show the sequence of the elements of an array.
+
+p *x@12
+
+print first twelve elements of the array x.
+
+
+*** Getting information
+print var
+info args 
+info local
+
+
+
+* Practice
+
+* Further
+** The Elements of Programming Style
+** Writing Solid Code
+** Code Complete
+
+* Wisdom
+
+    #+BEGIN_VERSE
+    In the end, only familiarity with the tools and techniques of the field
+    will provide the right solution for ra particular problem, and only a certain
+    amount of experience will provide consistently professional results.
+    
+                 -- Raymond Fielding. The Technique of Special Effects Cinematography
+     #+END_VERSE

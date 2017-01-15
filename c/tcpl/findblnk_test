@@ -1,0 +1,6 @@
+    printf("----------------\n");
+    printf("len, -len    ---- %d: %s", findblnk(line, strlen(line), -1 * strlen(line)), line);
+    printf("0, -len      ---- %d: %s", findblnk(line, 0, -1 * strlen(line)), line);
+    printf("-2 len       ---- %d: %s", findblnk(line, -2, strlen(line)), line);
+    printf("-2 -len      ---- %d: %s", findblnk(line, -2, -1 * strlen(line)), line);
+    printf("2 -11 * len  ---- %d: %s", findblnk(line, 2, -11 * strlen(line)), line);    

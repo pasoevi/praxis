@@ -1,0 +1,10 @@
+wflags = '-Wall -Wextra -Wstrict-prototypes -Wshadow -Wwrite-strings -Wold-style-definition -Wredundant-decls -Wnested-externs -Wmissing-include-dirs'
+ccflags = '-L/usr/lib -p -g ' + wflags
+
+env = Environment(cc = 'gcc', CCFLAGS = ccflags)
+list = env.SharedLibrary('list', ["list.c"])
+env.Install('/usr/local/lib', list)
+env.Alias('install', '/usr/local/lib')
+
+env.Install('/usr/lib', list)
+env.Alias('install-root', '/usr/lib')

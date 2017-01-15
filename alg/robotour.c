@@ -3,6 +3,12 @@
 #define PLANE_W 10
 #define PLANE_H 10
 
+struct location {
+    int x;
+    int y;
+    bool visited;
+};
+
 int robotour()
 {
     char plane[PLANE_W][PLANE_H] = {

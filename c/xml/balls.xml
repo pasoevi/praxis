@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+  
+<OBJECTS>
+    <object type="Sprite" x="500" y="100" width="128" height="55" textureFile="graphics/goo.png" numFrames="1"/>
+    <object type="Sprite" x="100" y="100" width="128" height="55" textureFile="graphics/goo.png" numFrames="1"/>
+</OBJECTS>

@@ -1,0 +1,26 @@
+(abcdefghijklmnopqrstuvwxyz   ABCDEFGHIJKLMNOPQRSTUVWXYZ   -*-decipher-*-
+)                          
+
+:(NS COMMAND-LINE-ARGS.CORE-TEST
+>
+:(:REQUIRE [CLOJURE.TEST :REFER :ALL]
+>
+:[COMMAND-LINE-ARGS.CORE :REFER :ALL]))
+>
+
+:(DEFTEST PAIRS-OF-VALUES
+>
+:(LET [ARGS ["--SERVER" "LOCALHOST"
+>
+:"--PORT" "8080"
+>
+:"--ENVIRONMENT" "PRODUCTION"]]
+>
+:(IS (= {:SERVER "LOCALHOST"
+>
+::PORT "8080"
+>
+::ENVIRONMENT "PRODUCTION"}
+>
+:(PARSE-ARGS ARGS)))))
+>
