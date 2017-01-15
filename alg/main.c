@@ -2,7 +2,6 @@
 
 int main(int argc, char *argv[])
 {
-    robotour();
-    getchar();
+    robotour_demo();
     return 0;
 }

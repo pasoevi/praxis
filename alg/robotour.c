@@ -1,7 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <math.h>
+#include "robotour.h"
 
 #define PLANE_W 10
 #define PLANE_H 10
+
+#define PLANE_SIZE 5
+#define MAX_DISTANCE 10000
 
 struct location {
     int x;
@@ -9,9 +16,91 @@ struct location {
     bool visited;
 };
 
-int robotour()
+/*
+ * Return the distance between two locations.
+ */
+float find_distance(struct location loc1, struct location loc2)
 {
-    char plane[PLANE_W][PLANE_H] = {
+    return sqrtf(pow((loc2.x - loc1.x), 2) + pow((loc2.y - loc1.y), 2));
+}
+
+/*
+ * Find the index of the location that is closest to location at index loc_index
+ * in the array of locations.
+ */
+int find_closest(int loc_index, struct location locations[])
+{
+    if (loc_index < 0) {
+        return loc_index;
+    }
+
+    struct location loc = locations[loc_index];
+    int closest_index = loc_index;
+    float closest_distance = MAX_DISTANCE;
+
+    for (int i = 0; i < PLANE_SIZE; i++) {
+        float distance = find_distance(loc, locations[i]);
+
+        if (i != loc_index &&
+            distance < closest_distance &&
+            locations[i].visited == false) {
+            closest_index = i;
+            closest_distance = distance;
+        }
+    }
+
+    return closest_index;
+}
+
+bool is_unvisited(struct location loc)
+{
+    return !(loc.visited);
+}
+
+int count_matching(bool(*predicate)(struct location), struct location locations[], int plane_size)
+{
+    int nmatching = 0;
+    for (int i = 0; i < plane_size; i++) {
+        if (predicate(locations[i])) {
+            nmatching++;
+        }
+    }
+
+    return nmatching;
+}
+
+/*
+* Let the robot travel to all the points on plane by visiting each point only
+* once and making the shortest trip possible.
+*/
+int robotour(int start_index, struct location plane[], int plane_size)
+{
+    printf("closest to %d is %d\n", start_index, find_closest(start_index, plane));
+
+    while (count_matching(is_unvisited, plane, plane_size) > 0) {
+        start_index = find_closest(start_index, plane);
+        plane[start_index].visited = true;
+        printf("X=%d,Y=%d,", plane[start_index].x, plane[start_index].y);
+    }
+}
+
+
+void robotour_demo()
+{
+    struct location plane[] = {
+        { 1, 1, false },
+        { 1, 2, false },
+        { 5, 1, false },
+        { 2, 2, false },
+        { 8, 5, false },
+    };
+
+    robotour(0, plane, 5);
+}
+
+int robotour_old()
+{
+    char plane_old[PLANE_W][PLANE_H] = {
         { 'A', 'B', '0', '0', '0', 'C', 'D', '0', '0', 'E' },
         { 'F', '0', '0', '0', 'G', '0', '0', '0', '0', 'H' },
         { 'I', 'J', '0', '0', 'K', 'L', '0', '0', '0', 'M' },
@@ -26,7 +115,7 @@ int robotour()
 
     for (int i = 0; i < PLANE_W; i++) {
         for (int j = 0; j < PLANE_H; j++) {
-            printf("%c\t", plane[i][j]);
+            printf("%c\t", plane_old[i][j]);
         }
         printf("\n");
     }

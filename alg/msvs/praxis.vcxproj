@@ -23,6 +23,9 @@
     <ClCompile Include="..\main.c" />
     <ClCompile Include="..\robotour.c" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\robotour.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9D81C9F1-1DAF-4FFB-9A67-A5FE4B5FE5C5}</ProjectGuid>
     <RootNamespace>praxis</RootNamespace>
