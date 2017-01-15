@@ -6,7 +6,7 @@
 #define PLANE_W 10
 #define PLANE_H 10
 
-#define PLANE_SIZE 5
+#define PLANE_SIZE 6
 #define MAX_DISTANCE 10000
 
 struct location {
@@ -56,6 +56,9 @@ bool is_unvisited(struct location loc)
     return !(loc.visited);
 }
 
+/*
+ * Return the number of locations that match a predicate.
+ */
 int count_matching(bool(*pred)(struct location), struct location locations[], int plane_size)
 {
     int nmatching = 0;
@@ -74,10 +77,11 @@ int count_matching(bool(*pred)(struct location), struct location locations[], in
  */
 int robotour(int start_idx, struct location plane[], int plane_size)
 {
+    plane[start_idx].visited = true;
     while (count_matching(is_unvisited, plane, plane_size) > 0) {
         start_idx = find_closest(start_idx, plane);
         plane[start_idx].visited = true;
-        printf("X=%d,Y=%d,", plane[start_idx].x, plane[start_idx].y);
+        printf("X=%d,Y=%d\n", plane[start_idx].x, plane[start_idx].y);
     }
 }
 
@@ -87,12 +91,13 @@ void robotour_demo()
     struct location plane[] = {
         { 1, 1, false },
         { 1, 2, false },
+        { 4, 4, false },
         { 5, 1, false },
         { 2, 2, false },
         { 8, 5, false },
     };
 
-    robotour(0, plane, 5);
+    robotour(0, plane, PLANE_SIZE);
 }
 
 int robotour_old()
