@@ -18,6 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\insertion_sort.c" />
+    <ClCompile Include="..\main.c" />
+    <ClCompile Include="..\robotour.c" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9D81C9F1-1DAF-4FFB-9A67-A5FE4B5FE5C5}</ProjectGuid>
     <RootNamespace>praxis</RootNamespace>
@@ -109,11 +114,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="insertion_sort.c" />
-    <ClCompile Include="main.c" />
-    <ClCompile Include="robotour.c" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

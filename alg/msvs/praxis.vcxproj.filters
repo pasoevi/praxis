@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="insertion_sort.c">
+    <ClCompile Include="..\insertion_sort.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="robotour.c">
+    <ClCompile Include="..\main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.c">
+    <ClCompile Include="..\robotour.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
