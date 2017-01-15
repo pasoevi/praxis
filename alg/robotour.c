@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
-#include "robotour.h"
 
 #define PLANE_W 10
 #define PLANE_H 10
@@ -57,11 +56,11 @@ bool is_unvisited(struct location loc)
     return !(loc.visited);
 }
 
-int count_matching(bool(*predicate)(struct location), struct location locations[], int plane_size)
+int count_matching(bool(*pred)(struct location), struct location locations[], int plane_size)
 {
     int nmatching = 0;
     for (int i = 0; i < plane_size; i++) {
-        if (predicate(locations[i])) {
+        if (pred(locations[i])) {
             nmatching++;
         }
     }
@@ -70,17 +69,15 @@ int count_matching(bool(*predicate)(struct location), struct location locations[
 }
 
 /*
-* Let the robot travel to all the points on plane by visiting each point only
-* once and making the shortest trip possible.
-*/
-int robotour(int start_index, struct location plane[], int plane_size)
+ * Let the robot travel to all the points on plane by visiting each point only
+ * once and making the shortest trip possible.
+ */
+int robotour(int start_idx, struct location plane[], int plane_size)
 {
-    printf("closest to %d is %d\n", start_index, find_closest(start_index, plane));
-
     while (count_matching(is_unvisited, plane, plane_size) > 0) {
-        start_index = find_closest(start_index, plane);
-        plane[start_index].visited = true;
-        printf("X=%d,Y=%d,", plane[start_index].x, plane[start_index].y);
+        start_idx = find_closest(start_idx, plane);
+        plane[start_idx].visited = true;
+        printf("X=%d,Y=%d,", plane[start_idx].x, plane[start_idx].y);
     }
 }
 
