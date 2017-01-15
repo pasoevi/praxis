@@ -1,6 +1,14 @@
-def fib(n):
-        if(n == 1):
-                return 1
-        if(n == 2):
-                return 2
-        return fib(n - 2) + fib(n - 1)
+import memoization
+
+@memoization.memoize
+def fib(x):
+    if x in (0, 1):
+        return x
+    else:
+        return fib(x-2) + fib(x-1)
+@memoization.memoize
+def fibgen(x):
+    a, b = 0,1
+    while a < x:
+        yield a
+        a, b = b, a + b
