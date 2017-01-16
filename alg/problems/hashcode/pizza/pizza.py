@@ -12,12 +12,25 @@ class Cell:
 
 
 class Slice:
-    def __init__(self, r1, c1, r2, c2):
+    cells = []
+    
+    def __init__(self, pizza, r1, c1, r2, c2):
         self.r1 = r1
         self.c1 = c1
         self.r2 = r2
         self.c2 = c2
-
+        for cell in pizza.cells:
+            if (cell.r >= r1 and cell.c >= c1) and (cell.r <= r2 and cell.c <= c2):
+                self.cells.append(cell)
+    
+    def is_valid(self, pizza):
+        num_tomatoes = len(list(filter(lambda cell: cell.ingredient == 'T', self.cells)))
+        num_mushrooms = len(list(filter(lambda cell: cell.ingredient == 'M', self.cells)))
+        if num_tomatoes >= pizza.min_ingredient_num and num_mushrooms >= pizza.min_ingredient_num and len(self.cells) <= pizza.max_cell:
+                return True
+            
+        return False
+        
     def print(self):
         return '{} {} {} {}'.format(self.r1, self.c1, self.r2, self.c2)
 
@@ -31,7 +44,7 @@ class Pizza:
     def read(self, filename):
         with open(filename, 'r') as f:
             pizza_info = f.readline()
-            self.numrows, self.numcols, self.min_ingrediend_num, self.max_cell = map(int, pizza_info.split())
+            self.numrows, self.numcols, self.min_ingredient_num, self.max_cell = map(int, pizza_info.split())
 
             for row, line in enumerate(f.readlines()):
                 for col, ingredient in enumerate(line.strip()):
@@ -51,7 +64,7 @@ class Pizza:
             return 2
 
     def print(self):
-        print(len(self.cells))
+        print(len(self.slices))
         for slice in self.slices:
             print(slice.print())
 
