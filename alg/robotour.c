@@ -9,7 +9,7 @@
 #define PLANE_SIZE 6
 #define MAX_DISTANCE 10000
 
-struct location {
+struct point {
     int x;
     int y;
     bool visited;
@@ -18,31 +18,31 @@ struct location {
 /*
  * Return the distance between two locations.
  */
-float find_distance(struct location loc1, struct location loc2)
+float find_distance(struct point loc1, struct point loc2)
 {
     return sqrtf(pow((loc2.x - loc1.x), 2) + pow((loc2.y - loc1.y), 2));
 }
 
 /*
- * Find the index of the location that is closest to location at index loc_index
+ * Find the index of the point that is closest to point at index loc_index
  * in the array of locations.
  */
-int find_closest(int loc_index, struct location locations[])
+int find_closest(int loc_index, struct point points[])
 {
     if (loc_index < 0) {
         return loc_index;
     }
 
-    struct location loc = locations[loc_index];
+    struct point loc = points[loc_index];
     int closest_index = loc_index;
     float closest_distance = MAX_DISTANCE;
 
     for (int i = 0; i < PLANE_SIZE; i++) {
-        float distance = find_distance(loc, locations[i]);
+        float distance = find_distance(loc, points[i]);
 
         if (i != loc_index &&
             distance < closest_distance &&
-            locations[i].visited == false) {
+            points[i].visited == false) {
             closest_index = i;
             closest_distance = distance;
         }
@@ -51,19 +51,19 @@ int find_closest(int loc_index, struct location locations[])
     return closest_index;
 }
 
-bool is_unvisited(struct location loc)
+bool is_unvisited(struct point p)
 {
-    return !(loc.visited);
+    return !(p.visited);
 }
 
 /*
- * Return the number of locations that match a predicate.
+ * Return the number of points that match a predicate.
  */
-int count_matching(bool(*pred)(struct location), struct location locations[], int plane_size)
+int count_matching(bool(*pred)(struct point), struct point points[], int plane_size)
 {
     int nmatching = 0;
     for (int i = 0; i < plane_size; i++) {
-        if (pred(locations[i])) {
+        if (pred(points[i])) {
             nmatching++;
         }
     }
@@ -75,7 +75,7 @@ int count_matching(bool(*pred)(struct location), struct location locations[], in
  * Let the robot travel to all the points on plane by visiting each point only
  * once and making the shortest trip possible.
  */
-int robotour(int start_idx, struct location plane[], int plane_size)
+int robotour(int start_idx, struct point plane[], int plane_size)
 {
     plane[start_idx].visited = true;
     while (count_matching(is_unvisited, plane, plane_size) > 0) {
@@ -88,7 +88,7 @@ int robotour(int start_idx, struct location plane[], int plane_size)
 
 void robotour_demo()
 {
-    struct location plane[] = {
+    struct point plane[] = {
         { 1, 1, false },
         { 1, 2, false },
         { 4, 4, false },
