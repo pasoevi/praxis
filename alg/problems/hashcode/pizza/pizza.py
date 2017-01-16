@@ -4,6 +4,14 @@ import sys
 import pprint
 import itertools
 
+def partition(pred, iterable):
+    'Use a predicate to partition entries into false entries and true entries'
+    # partition(is_odd, range(10)) --> 0 2 4 6 8   and  1 3 5 7 9
+    n = 6
+    combinations = [iterable[i:i + n] for i in range(0, len(iterable), n)]
+
+    return filter(pred, combinations)
+
 class Cell:
     def __init__(self, r, c, ingredient):
         self.r = r
@@ -13,20 +21,28 @@ class Cell:
 
 class Slice:
     cells = []
+    num_tomatoes = 0
+    num_mushrooms = 0
     
-    def __init__(self, pizza, r1, c1, r2, c2):
+    def __init__(self, pizza=None, r1=0, c1=0, r2=0, c2=0):
         self.r1 = r1
         self.c1 = c1
         self.r2 = r2
         self.c2 = c2
-        for cell in pizza.cells:
-            if (cell.r >= r1 and cell.c >= c1) and (cell.r <= r2 and cell.c <= c2):
-                self.cells.append(cell)
-    
+        if pizza:
+            for cell in pizza.cells:
+                if (cell.r >= r1 and cell.c >= c1) and (cell.r <= r2 and cell.c <= c2):
+                    self.cells.append(cell)
+
+    def from_cells(self, cells):
+        self.num_tomatoes = len(list(filter(lambda cell: cell.ingredient == 'T', self.cells)))
+        self.num_mushrooms = len(list(filter(lambda cell: cell.ingredient == 'M', self.cells)))
+        self.cells = cells
+
     def is_valid(self, pizza):
-        num_tomatoes = len(list(filter(lambda cell: cell.ingredient == 'T', self.cells)))
-        num_mushrooms = len(list(filter(lambda cell: cell.ingredient == 'M', self.cells)))
-        if num_tomatoes >= pizza.min_ingredient_num and num_mushrooms >= pizza.min_ingredient_num and len(self.cells) <= pizza.max_cell:
+        self.num_tomatoes = len(list(filter(lambda cell: cell.ingredient == 'T', self.cells)))
+        self.num_mushrooms = len(list(filter(lambda cell: cell.ingredient == 'M', self.cells)))
+        if self.num_tomatoes >= pizza.min_ingredient_num and self.num_mushrooms >= pizza.min_ingredient_num and len(self.cells) <= pizza.max_cell:
                 return True
             
         return False
@@ -55,13 +71,19 @@ class Pizza:
             #     for ingredient in line:
             #         self.cells.append(Cell(r, c, ingredient))
 
+    # def slice(self):
+    #     if len(self.cells) is 0:
+    #         return self.cells
+    #     for cell1, cell2 in 
+
     def slice(self):
-        if len(self.cells) is 0:
-            return self.cells
-        elif len(list(filter(lambda cell: cell.ingredient == 'T', self.cells))) == 12:
-            return 1
-        else:
-            return 2
+        def is_valid(lst):
+            slice = Slice()
+            slice.from_cells(lst)
+            
+            return slice.is_valid(self)
+
+        self.slices = list(partition(is_valid, self.cells))
 
     def print(self):
         print(len(self.slices))
@@ -72,5 +94,6 @@ if __name__ == '__main__':
     input_file = sys.argv[1]
     pizza = Pizza()
     pizza.read(input_file)
-    pizza.print()
+    
     print(pizza.slice())
+    pizza.print()
