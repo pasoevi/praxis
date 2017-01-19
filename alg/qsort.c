@@ -106,7 +106,3 @@ int qksort(void *data, size_t length, size_t esize, int start,  int end,
     
     return 0;
 }
-							
-  
-
-  

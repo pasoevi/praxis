@@ -19,21 +19,20 @@ void sort_demo()
     }
 
     putchar('\n');
-    qksort(nums, sizeof(nums) / sizeof(int), sizeof(int),  0, 6, compareInt);
+    qksort(nums, 7, sizeof(int),  0, 6, compareInt);
     for (i = 0; i < LEN; i++) {
         printf("%d, ", nums[i]);
     }
-    
+
     putchar('\n');
     int target = 12;
     /* Search for 12 using the binary search algorithm. */
-    int pos = bisearch(nums, &target, 7, sizeof(int), compareInt);
+    int pos = bisearch(nums, &target, LEN, sizeof(int), compareInt);
     // printf("Target is located at %d\n", pos);
-
 
     /* names */
     int j;
-    for(j = 0; j < LEN; i++){
+    for(j = 0; j < 3; i++){
         printf("%s \n", names[i]);
     }
     putchar('\n');
@@ -41,7 +40,7 @@ void sort_demo()
     //  qksort(names, sizeof(names) / sizeof(int), sizeof(int), 0, 6, strcmp);
 
   
-    for(j = 0; j < LEN; i++){
+    for(j = 0; j < 3; i++){
         printf("%s \n", names[i]);
     }
 

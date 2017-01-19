@@ -32,7 +32,8 @@ int find_closest(int loc_index, struct point points[], int plane_size)
     int closest_index = loc_index;
     float closest_distance = MAX_DISTANCE;
 
-    for (int i = 0; i < plane_size; i++) {
+    int i;
+    for (i = 0; i < plane_size; i++) {
         float distance = find_distance(loc, points[i]);
 
         if (i != loc_index &&
@@ -57,7 +58,8 @@ bool is_unvisited(struct point p)
 int count_matching(bool(*pred)(struct point), struct point points[], int plane_size)
 {
     int nmatching = 0;
-    for (int i = 0; i < plane_size; i++) {
+    int i;
+    for (i = 0; i < plane_size; i++) {
         if (pred(points[i])) {
             nmatching++;
         }
@@ -95,8 +97,9 @@ int robotour_old()
         { '0', '0', '0', '0', '0', 'Y', '0', 'Z', '0', '0' }
     };
 
-    for (int i = 0; i < PLANE_W; i++) {
-        for (int j = 0; j < PLANE_H; j++) {
+    int i, j;
+    for (i = 0; i < PLANE_W; i++) {
+        for (j = 0; j < PLANE_H; j++) {
             printf("%c\t", plane_old[i][j]);
         }
         printf("\n");
