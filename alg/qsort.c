@@ -19,10 +19,11 @@ int compareInt(const void *int1, const void *int2){
        return 0;
        }
     */
-    if((*(const int *)int1 % 2) == 0)
+    if ((*(const int *)int1 % 2) == 0) {
         return -1;
-    else
+    } else {
         return 1;
+    }
 }
     
 static int partition(void *data, size_t esize, int start, int end,

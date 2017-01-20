@@ -32,7 +32,7 @@ void sort_demo()
 
     /* names */
     int j;
-    for(j = 0; j < 3; i++){
+    for (j = 0; j < 3; i++) {
         printf("%s \n", names[i]);
     }
     putchar('\n');
@@ -40,7 +40,7 @@ void sort_demo()
     //  qksort(names, sizeof(names) / sizeof(int), sizeof(int), 0, 6, strcmp);
 
   
-    for(j = 0; j < 3; i++){
+    for (j = 0; j < 3; i++) {
         printf("%s \n", names[i]);
     }
 
