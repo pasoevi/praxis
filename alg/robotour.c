@@ -2,18 +2,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+#include "robotour.h"
 
 #define PLANE_W 10
 #define PLANE_H 10
 
 #define PLANE_SIZE 6
 #define MAX_DISTANCE 10000
-
-struct point {
-    int x;
-    int y;
-    bool visited;
-};
 
 /*
  * Return the distance between two locations.
@@ -27,7 +22,7 @@ float find_distance(struct point loc1, struct point loc2)
  * Find the index of the point that is closest to point at index loc_index
  * in the array of locations.
  */
-int find_closest(int loc_index, struct point points[])
+int find_closest(int loc_index, struct point points[], int plane_size)
 {
     if (loc_index < 0) {
         return loc_index;
@@ -37,7 +32,8 @@ int find_closest(int loc_index, struct point points[])
     int closest_index = loc_index;
     float closest_distance = MAX_DISTANCE;
 
-    for (int i = 0; i < PLANE_SIZE; i++) {
+    int i;
+    for (i = 0; i < plane_size; i++) {
         float distance = find_distance(loc, points[i]);
 
         if (i != loc_index &&
@@ -62,7 +58,8 @@ bool is_unvisited(struct point p)
 int count_matching(bool(*pred)(struct point), struct point points[], int plane_size)
 {
     int nmatching = 0;
-    for (int i = 0; i < plane_size; i++) {
+    int i;
+    for (i = 0; i < plane_size; i++) {
         if (pred(points[i])) {
             nmatching++;
         }
@@ -79,25 +76,10 @@ int robotour(int start_idx, struct point plane[], int plane_size)
 {
     plane[start_idx].visited = true;
     while (count_matching(is_unvisited, plane, plane_size) > 0) {
-        start_idx = find_closest(start_idx, plane);
+        start_idx = find_closest(start_idx, plane, plane_size);
         plane[start_idx].visited = true;
         printf("X=%d,Y=%d\n", plane[start_idx].x, plane[start_idx].y);
     }
-}
-
-
-void robotour_demo()
-{
-    struct point plane[] = {
-        { 1, 1, false },
-        { 1, 2, false },
-        { 4, 4, false },
-        { 5, 1, false },
-        { 2, 2, false },
-        { 8, 5, false },
-    };
-
-    robotour(0, plane, PLANE_SIZE);
 }
 
 int robotour_old()
@@ -115,8 +97,9 @@ int robotour_old()
         { '0', '0', '0', '0', '0', 'Y', '0', 'Z', '0', '0' }
     };
 
-    for (int i = 0; i < PLANE_W; i++) {
-        for (int j = 0; j < PLANE_H; j++) {
+    int i, j;
+    for (i = 0; i < PLANE_W; i++) {
+        for (j = 0; j < PLANE_H; j++) {
             printf("%c\t", plane_old[i][j]);
         }
         printf("\n");
