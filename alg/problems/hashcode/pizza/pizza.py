@@ -31,7 +31,7 @@ class Slice:
 
 
     def print(self):
-        return '{} {} {} {}'.format(self.x[0], self.y[0], self.x[1], self.y[1])
+        return '{} {} {} {}'.format(self.x[0], self.x[1], self.y[0], self.y[1])
 
 
 class Pizza:
@@ -93,11 +93,11 @@ class Pizza:
         else:
             raise Exception("invalid slice")
 
-        def print_pizza(self):
-            for row in self.matrix:
-                string_row = ''
-                for cell in row:
-                    string_row = string_row + str(cell) + ' '
+    def print_pizza(self):
+        for row in self.matrix:
+            string_row = ''
+            for cell in row:
+                string_row = string_row + str(cell) + ' '
                 print(string_row)
 
     def print(self):
