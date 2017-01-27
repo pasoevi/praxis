@@ -24,4 +24,5 @@
     (* r (pwr r (- p 1)))
     (square (pwr r (/ p 2)))))
 
+
 (pwr 4 2)
