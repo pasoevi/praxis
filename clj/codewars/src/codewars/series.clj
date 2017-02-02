@@ -8,13 +8,6 @@
             (/ 1 (+ (* (- n 1) 3 ) 1))
             (series-sum-rec (- n 1))))))
 
-(defn series-sum-loop [n]
-  (loop [n n
-         sum 0]
-    (cond (= n 0) 0
-          (= n 1) 1
-          :else (recur (- n 1) (
-
 (def series-sum-memo (memoize series-sum-rec))
 
 (defn series-sum [n]
