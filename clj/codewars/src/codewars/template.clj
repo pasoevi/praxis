@@ -3,6 +3,6 @@
 
 (defn template [s]
   (fn [mp]
-    (doseq [keyval mp] (re (key keyval) (val keyval)))))
+    (doseq [keyval mp] (map (key keyval) (val keyval)))))
 
 

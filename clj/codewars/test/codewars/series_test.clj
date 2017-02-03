@@ -2,7 +2,7 @@
   (:require [clojure.test :refer :all]
             [codewars.series :refer :all]))
 
- (deftest a-test1
+; (deftest a-test1
 ;   (testing "Test 1"
 ;     (is (= (series-sum 9) "1.77"))))
 ; (deftest a-test2
