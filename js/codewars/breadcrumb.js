@@ -27,7 +27,6 @@ function generateBC(url, separator) {
         '<a href="/">HOME</a>', // root/home
     ];
 
-    console.log(`middle is ${middle}`);
     middle.forEach(function(part, i) {
         let partAcronym = part.toUpperCase().replace(/-/g, ' ');
         if (part.length > 30) {
@@ -37,7 +36,6 @@ function generateBC(url, separator) {
     });
 
     if (middle.length > 0) {
-        console.log(`last is ${last}`);
         let lastAcronym = last.toUpperCase().replace(/-/g, ' ');
         if (last.length > 30) {
             lastAcronym = acronymize(last);
@@ -47,11 +45,7 @@ function generateBC(url, separator) {
     return crumbs.join(separator);
 }
 
-// console.log(generateBC("mysite.com/pictures/holidays.html", " : "));
-// console.log(generateBC("www.microsoft.com/important/confidential/docs/index.htm#top", " * "));
-// console.log(generateBC("mysite.com/very-long-url-to-make-a-silly-yet-meaningful-example/example.asp", " > "));
-// console.log(generateBC("www.very-long-site_name-to-make-a-silly-yet-meaningful-example.com/users/giacomo-sorbi", " + "));
-// console.log(generateBC('http://twitter.de/kamehameha-of-with-meningitis-bladder-for-with-insider/games/app/games#bottom', ' : '));
-// console.log(generateBC('http://www.github.com/by-or-biotechnology-uber-insider-the-surfer-from-and-uber/or-bladder-and-of-skin-research-kamehameha-by-diplomatic', ' # '));
-// console.log(generateBC('https://google.ca/uber-surfer-and-from-of-immunity-cauterization/most-downloaded/research-insider-the-from-uber-at-by-research/index.php', ' : '));
+console.log(generateBC("www.microsoft.com/docs/index.htm", " * "));
+console.log('<a href="/">HOME</a> * <span class="active">DOCS</span>');
 console.log(generateBC('http://google.ca?rank=recent_first&hide=sold', ' # '));
+console.log(generateBC('agcpartners.co.uk/bladder-immunity-research-meningitis-the-bladder-insider/games#conclusion', ' * '));
