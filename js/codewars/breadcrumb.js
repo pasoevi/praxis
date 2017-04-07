@@ -35,6 +35,8 @@ function generateBC(url, separator) {
         crumbs.push(`<a href="/${middle.slice(0, i + 1).join('/')}/">${partAcronym.toUpperCase()}</a>`);
     });
 
+    console.log(last);
+
     if (middle.length > 0) {
         let lastAcronym = last.toUpperCase().replace(/-/g, ' ');
         if (last.length > 30) {
