@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<OBJECTS>
+<object type="alien_ship" x="618" y="-367" dx="0" dy="3" width="33" height="94" numFrames="1"/>
+<object type="alien_ship" x="439" y="-1678" dx="0" dy="2" width="77" height="99" numFrames="1"/>
+<object type="alien_ship" x="353" y="-1102" dx="0" dy="4" width="36" height="87" numFrames="1"/>
+<object type="alien_ship" x="590" y="-925" dx="0" dy="4" width="39" height="80" numFrames="1"/>
+<object type="alien_ship" x="724" y="-380" dx="0" dy="3" width="54" height="90" numFrames="1"/>
+<object type="alien_ship" x="350" y="-1299" dx="0" dy="4" width="68" height="48" numFrames="1"/>
+<object type="alien_ship" x="509" y="-765" dx="0" dy="3" width="45" height="88" numFrames="1"/>
+<object type="alien_ship" x="394" y="-1099" dx="0" dy="4" width="54" height="70" numFrames="1"/>
+<object type="alien_ship" x="680" y="-644" dx="0" dy="5" width="55" height="40" numFrames="1"/>
+<object type="alien_ship" x="744" y="-1531" dx="0" dy="4" width="30" height="85" numFrames="1"/>
+<object type="powerup" x="503" y="-902" dx="0" dy="5" width="30" height="30" numFrames="1"/>
+<object type="powerup" x="218" y="-1875" dx="0" dy="5" width="30" height="30" numFrames="1"/>
+<object type="powerup" x="146" y="-1723" dx="0" dy="5" width="30" height="30" numFrames="1"/>
+<object type="powerup" x="261" y="-1980" dx="0" dy="5" width="30" height="30" numFrames="1"/>
+<object type="powerup" x="100" y="-452" dx="0" dy="5" width="30" height="30" numFrames="1"/>
+<object type="powerup" x="80" y="-829" dx="0" dy="5" width="30" height="30" numFrames="1"/>
+<object type="powerup" x="206" y="-798" dx="0" dy="5" width="30" height="30" numFrames="1"/>
+<object type="powerup" x="87" y="-560" dx="0" dy="5" width="30" height="30" numFrames="1"/>
+<object type="powerup" x="615" y="-318" dx="0" dy="5" width="30" height="30" numFrames="1"/>
+<object type="powerup" x="449" y="-433" dx="0" dy="5" width="30" height="30" numFrames="1"/>
+
+</OBJECTS>

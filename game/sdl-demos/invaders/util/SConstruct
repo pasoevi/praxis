@@ -1,0 +1,6 @@
+cc = "gcc"
+ccflags = '-g -O0' # -pedantic' + w
+
+env = Environment(CC = cc, CCFLAGS = ccflags, tools=['default', 'mingw'], TARFLAGS = '-c -z')
+
+env.Program('mklevel.c')

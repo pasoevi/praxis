@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<OBJECTS>
+<object type="alien_ship" x="1568" y="-367" dx="0" dy="3" width="33" height="94" numFrames="1"/>
+<object type="alien_ship" x="814" y="-1678" dx="0" dy="2" width="77" height="99" numFrames="1"/>
+<object type="alien_ship" x="2001" y="-1102" dx="0" dy="4" width="36" height="87" numFrames="1"/>
+<object type="alien_ship" x="3923" y="-925" dx="0" dy="4" width="39" height="80" numFrames="1"/>
+<object type="alien_ship" x="1787" y="-380" dx="0" dy="3" width="54" height="90" numFrames="1"/>
+<object type="alien_ship" x="1120" y="-1299" dx="0" dy="4" width="68" height="48" numFrames="1"/>
+<object type="alien_ship" x="2100" y="-765" dx="0" dy="3" width="45" height="88" numFrames="1"/>
+<object type="alien_ship" x="849" y="-1099" dx="0" dy="4" width="54" height="70" numFrames="1"/>
+<object type="alien_ship" x="1589" y="-644" dx="0" dy="5" width="55" height="40" numFrames="1"/>
+<object type="alien_ship" x="1414" y="-1531" dx="0" dy="4" width="30" height="85" numFrames="1"/>
+
+</OBJECTS>
