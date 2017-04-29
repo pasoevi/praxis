@@ -1,4 +1,4 @@
-import {inputStream} from '../src/istream';
+import { inputStream } from "./istream";
 
 QUnit.test("hello test", function(assert) {
     let istream = inputStream('sergi');
