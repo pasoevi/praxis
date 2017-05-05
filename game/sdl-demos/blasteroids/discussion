@@ -1,0 +1,43 @@
+
+
+
+[Tue Oct 29 2013]
+*** You have joined channel #allegro  [11:56]
+*** Topic for #allegro: /Welcome to Allegro! | Allegro @ 5.0.10 | Website:
+    http://liballeg.org | Forum: http://www.allegro.cc | Wiki:
+    http://wiki.allegro.cc | Paste: http://paste.baf.cc/allegro | Minecraft?
+    ?? minecraft
+*** #allegro: topic set by Tomasu, 2013-09-25 11:26:49
+*** Users on #allegro: manyglaciers +Sausage +Latexi95 +jgctor_ +dwi +Ape
+    +tdammers +belak +Shoozza +juviwork +antto +bambot +PTapioK +MattyMatt
+    +bambams +alledos +elias +Funklord +Tomasu +Sevalecan +Tigge_ +dsar
+    +mokkan +Tapani +xGrantx +Rylee +HappyPonyLand +KittyCat +Trezker +s0s
+    +Mr-Hide +Konomi +Allegro +Redundant +demonicmaniac3 +neuro_sys +bamj0rb
+    +TheVoiid +kaede|sheepy +donkeybox +q66 +demonicmaniac +DrCode +Japa
+*** #allegro URL: http://www.allegro.cc/
+*** ChanServ (ChanServ@services.) has changed mode for #allegro to +v
+    manyglaciers
+*** #allegro modes: +nt
+*** #allegro was created on 2006-11-26 10:42:36
+<manyglaciers> Hi. What is the allegro way of moving an object to the
+	       direction indicated by a variable which determines to what
+	       direction the object is heading. This variable can take values
+	       from -PI to PI  [11:58]
+<tdammers> not allegro specific  [12:10]
+<tdammers> you transform the movement vector from polar coordinates (angle and
+	   velocity) to carthesian (x and y velocity)
+<tdammers> then you multiply that movement vector by the time delta
+<tdammers> and add it to the object's position\
+<tdammers> so something like object.x += object.velocity * cos(object.angle) *
+	   deltat; object.y += object.velocity * sin(object.angle) * deltat;
+								        [12:11]
+<tdammers> (-PI ... PI is already radians, so you don't need to convert it for
+	   the trigonometric functions)  [12:12]
+*** Konomi (~Konomi@unaffiliated/konomi) has quit: Ping timeout: 272 seconds
+								        [12:18]
+*** Konomi (~Konomi@unaffiliated/konomi) has joined channel #allegro  [12:19]
+*** ChanServ (ChanServ@services.) has changed mode for #allegro to +v Konomi
+*** Solak (~stijnw@cthia.xs4all.nl) has joined channel #allegro  [12:20]
+*** ChanServ (ChanServ@services.) has changed mode for #allegro to +v Solak
+								        [12:21]
+ERC> 

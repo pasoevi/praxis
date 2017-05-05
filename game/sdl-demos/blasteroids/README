@@ -1,0 +1,32 @@
+Blasteroids
+
+A simple implementation of the classic Blasteroids game. This game is
+a work in progress.
+
+Building
+--------
+
+Depends only on Allegro Game Programming Library
+(http://alleg.sourceforge.net/) and its addons, which most probably
+are installed along with it.
+
+On Gnu systems, just run:
+
+make
+
+Other systems
+-------------
+
+It should be possible to build Blasteroids on Windows with MinGW. 
+
+You might have to remove redundant W flags from the Makefile to get
+the program built with Clang on Mac OS X.
+
+In future it will be possible to cross-build this program for
+Rockbox-running media devices, as well as mobile devices.
+
+License
+-------
+
+For information on what you can do with the source code, please, see
+the COPYING file

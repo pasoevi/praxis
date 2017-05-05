@@ -1,0 +1,344 @@
+GETOPT(3)		   Linux Programmer's Manual		     GETOPT(3)
+
+
+
+1mNAME0m
+       getopt, getopt_long, getopt_long_only, optarg, optind, opterr, optopt -
+       Parse command-line options
+
+1mSYNOPSIS0m
+       1m#include <unistd.h>0m
+
+       1mint getopt(int 4m22margc24m1m, char * const 4m22margv[]24m1m,0m
+		  1mconst char *4m22moptstring24m1m);0m
+
+       1mextern char *4m22moptarg24m1m;0m
+       1mextern int 4m22moptind24m1m, 4m22mopterr24m1m, 4m22moptopt24m1m;0m
+
+       1m#include <getopt.h>0m
+
+       1mint getopt_long(int 4m22margc24m1m, char * const 4m22margv[]24m1m,0m
+		  1mconst char *4m22moptstring24m1m,0m
+		  1mconst struct option *4m22mlongopts24m1m, int *4m22mlongindex24m1m);0m
+
+       1mint getopt_long_only(int 4m22margc24m1m, char * const 4m22margv[]24m1m,0m
+		  1mconst char *4m22moptstring24m1m,0m
+		  1mconst struct option *4m22mlongopts24m1m, int *4m22mlongindex24m1m);0m
+
+   Feature Test Macro Requirements for glibc (see 1mfeature_test_macros22m(7)):
+
+       1mgetopt22m(): _POSIX_C_SOURCE >= 2 || _XOPEN_SOURCE
+       1mgetopt_long22m(), 1mgetopt_long_only22m(): _GNU_SOURCE
+
+1mDESCRIPTION0m
+       The 1mgetopt22m() function parses the command-line arguments.  Its arguments
+       4margc24m  and 4margv24m are the argument count and array as passed to the 4mmain24m()
+       function on program invocation.	An element of 4margv24m	 that  starts  with
+       '-' (and is not exactly "-" or "--") is an option element.  The charac‐
+       ters of this element (aside from the initial '-')  are  option  charac‐
+       ters.   If  1mgetopt22m() is called repeatedly, it returns successively each
+       of the option characters from each of the option elements.
+
+       The variable 4moptind24m is the index of the next element to be processed in
+       4margv24m.  The system initializes this value to 1.  The caller can reset it
+       to 1 to restart scanning of the same 4margv24m, or when scanning a new argu‐
+       ment vector.
+
+       If  1mgetopt22m() finds another option character, it returns that character,
+       updating the external variable 4moptind24m and a static variable 4mnextchar24m so
+       that  the  next call to 1mgetopt22m() can resume the scan with the following
+       option character or 4margv24m-element.
+
+       If there are no more option  characters,	 1mgetopt22m()	returns	 -1.   Then
+       4moptind24m  is	the  index in 4margv24m of the first 4margv24m-element that is not an
+       option.
+
+       4moptstring24m is a string containing the legitimate option characters.	 If
+       such  a	character is followed by a colon, the option requires an argu‐
+       ment, so 1mgetopt22m() places a pointer to the following text  in  the  same
+       4margv24m-element,  or  the  text  of the following 4margv24m-element, in 4moptarg24m.
+       Two colons mean an option takes an optional arg; if there  is  text  in
+       the  current  4margv24m-element	(i.e.,	in the same word as the option name
+       itself, for example, "-oarg"), then it is returned in 4moptarg24m, otherwise
+       4moptarg24m is set to zero.  This is a GNU extension.  If 4moptstring24m contains
+       1mW 22mfollowed by a semicolon, then 1m-W foo 22mis treated as  the  long  option
+       1m--foo22m.  (The 1m-W 22moption is reserved by POSIX.2 for implementation exten‐
+       sions.)	This behavior is a GNU extension, not available with libraries
+       before glibc 2.
+
+       By default, 1mgetopt22m() permutes the contents of 4margv24m as it scans, so that
+       eventually all the nonoptions are at the end.  Two other modes are also
+       implemented.   If  the first character of 4moptstring24m is '+' or the envi‐
+       ronment variable 1mPOSIXLY_CORRECT 22mis set, then option  processing  stops
+       as soon as a nonoption argument is encountered.	If the first character
+       of 4moptstring24m is '-', then each nonoption 4margv24m-element is handled as  if
+       it were the argument of an option with character code 1.	 (This is used
+       by programs that were written to expect options and other 4margv24m-elements
+       in any order and that care about the ordering of the two.)  The special
+       argument "--" forces an end of option-scanning regardless of the	 scan‐
+       ning mode.
+
+       If  1mgetopt22m() does not recognize an option character, it prints an error
+       message to 4mstderr24m, stores the character in	4moptopt24m,  and  returns  '?'.
+       The  calling program may prevent the error message by setting 4mopterr24m to
+       0.
+
+       If 1mgetopt22m() finds an option character in 4margv24m that was not included  in
+       4moptstring24m,	or  if it detects a missing option argument, it returns '?'
+       and sets the external variable 4moptopt24m to the actual	 option	 character.
+       If  the	first  character  (following any optional '+' or '-' described
+       above) of 4moptstring24m is a colon (':'), then 1mgetopt22m() returns ':' instead
+       of  '?'	to  indicate  a	 missing  option  argument.   If  an error was
+       detected, and the first character of 4moptstring24m is not a colon, and	the
+       external	 variable  4mopterr24m	is nonzero (which is the default), 1mgetopt22m()
+       prints an error message.
+
+   1mgetopt_long() and getopt_long_only()0m
+       The 1mgetopt_long22m() function works like  1mgetopt22m()  except  that	it  also
+       accepts long options, started with two dashes.  (If the program accepts
+       only long options, then 4moptstring24m  should  be  specified  as  an  empty
+       string  (""),  not  NULL.)  Long option names may be abbreviated if the
+       abbreviation is unique or is an exact match for some defined option.  A
+       long  option  may  take	a  parameter, of the form 1m--arg=param 22mor 1m--arg0m
+       1mparam22m.
+
+       4mlongopts24m is a pointer to the first element of an array of 4mstruct24m 4moption0m
+       declared in 4m<getopt.h>24m as
+
+	   struct option {
+	       const char *name;
+	       int	   has_arg;
+	       int	  *flag;
+	       int	   val;
+	   };
+
+       The meanings of the different fields are:
+
+       4mname24m   is the name of the long option.
+
+       4mhas_arg0m
+	      is:  1mno_argument 22m(or 0) if the option does not take an argument;
+	      1mrequired_argument 22m(or 1) if the option requires an argument;	 or
+	      1moptional_argument  22m(or  2) if the option takes an optional argu‐
+	      ment.
+
+       4mflag24m   specifies how results are returned for a long option.   If  4mflag0m
+	      is  NULL,	 then  1mgetopt_long22m()  returns  4mval24m.  (For example, the
+	      calling program may set 4mval24m to the equivalent short option char‐
+	      acter.)	Otherwise, 1mgetopt_long22m() returns 0, and 4mflag24m points to
+	      a variable which is set to 4mval24m if the option is found, but  left
+	      unchanged if the option is not found.
+
+       4mval24m	   is  the value to return, or to load into the variable pointed to
+	      by 4mflag24m.
+
+       The last element of the array has to be filled with zeros.
+
+       If 4mlongindex24m is not NULL, it points to a variable which is set  to	the
+       index of the long option relative to 4mlongopts24m.
+
+       1mgetopt_long_only22m()	is  like 1mgetopt_long22m(), but '-' as well as "--" can
+       indicate a long option.	If an option that starts with '-'  (not	 "--")
+       doesn't	match  a  long	option,	 but  does match a short option, it is
+       parsed as a short option instead.
+
+1mRETURN VALUE0m
+       If an option was successfully found, then 1mgetopt22m() returns	the  option
+       character.  If all command-line options have been parsed, then 1mgetopt22m()
+       returns -1.  If 1mgetopt22m() encounters an option character that was not in
+       4moptstring24m, then '?' is returned.  If 1mgetopt22m() encounters an option with
+       a missing argument, then the return value depends on the first  charac‐
+       ter  in 4moptstring24m: if it is ':', then ':' is returned; otherwise '?' is
+       returned.
+
+       1mgetopt_long22m() and 1mgetopt_long_only22m() also return the  option  character
+       when  a short option is recognized.  For a long option, they return 4mval0m
+       if 4mflag24m is NULL, and 0 otherwise.  Error and -1 returns are the same as
+       for  1mgetopt22m(), plus '?' for an ambiguous match or an extraneous parame‐
+       ter.
+
+1mENVIRONMENT0m
+       1mPOSIXLY_CORRECT0m
+	      If this is set, then option processing stops as soon as a nonop‐
+	      tion argument is encountered.
+
+       1m_<PID>_GNU_nonoption_argv_flags_0m
+	      This  variable  was  used by 1mbash22m(1) 2.0 to communicate to glibc
+	      which arguments are the results of  wildcard  expansion  and  so
+	      should  not be considered as options.  This behavior was removed
+	      in 1mbash22m(1) version 2.01, but the support remains in glibc.
+
+1mCONFORMING TO0m
+       1mgetopt22m():
+	      POSIX.2 and  POSIX.1-2001,  provided  the	 environment  variable
+	      1mPOSIXLY_CORRECT	 22mis set.  Otherwise, the elements of 4margv24m aren't
+	      really const, because we permute them.  We pretend they're const
+	      in the prototype to be compatible with other systems.
+
+	      The use of '+' and '-' in 4moptstring24m is a GNU extension.
+
+	      On   some	  older	 implementations,  1mgetopt22m()  was  declared	 in
+	      4m<stdio.h>24m.  SUSv1 permitted the declaration to appear in  either
+	      4m<unistd.h>24m	or  4m<stdio.h>24m.   POSIX.1-2001  marked  the	 use  of
+	      4m<stdio.h>24m for this purpose as  LEGACY.   POSIX.1-2001  does	not
+	      allow the declaration to appear in 4m<stdio.h>24m.
+
+       1mgetopt_long22m() and 1mgetopt_long_only22m():
+	      These functions are GNU extensions.
+
+1mNOTES0m
+       A  program  that	 scans	multiple argument vectors, or rescans the same
+       vector more than once, and wants to make use of GNU extensions such  as
+       '+'  and	 '-'  at  the  start  of  4moptstring24m,  or  changes the value of
+       1mPOSIXLY_CORRECT 22mbetween scans, must reinitialize 1mgetopt22m() by  resetting
+       4moptind24m  to	0, rather than the traditional value of 1.  (Resetting to 0
+       forces the  invocation  of  an  internal	 initialization	 routine  that
+       rechecks 1mPOSIXLY_CORRECT 22mand checks for GNU extensions in 4moptstring24m.)
+
+1mBUGS0m
+       The  POSIX.2  specification of 1mgetopt22m() has a technical error described
+       in POSIX.2 Interpretation 150.  The GNU	implementation	(and  probably
+       all  other implementations) implements the correct behavior rather than
+       that specified.
+
+1mEXAMPLE0m
+       The following trivial example program uses 1mgetopt22m() to handle two  pro‐
+       gram  options:  4m-n24m, with no associated value; and 4m-t24m 4mval24m, which expects
+       an associated value.
+
+       #include <unistd.h>
+       #include <stdlib.h>
+       #include <stdio.h>
+
+       int
+       main(int argc, char *argv[])
+       {
+	   int flags, opt;
+	   int nsecs, tfnd;
+
+	   nsecs = 0;
+	   tfnd = 0;
+	   flags = 0;
+	   while ((opt = getopt(argc, argv, "nt:")) != -1) {
+	       switch (opt) {
+	       case 'n':
+		   flags = 1;
+		   break;
+	       case 't':
+		   nsecs = atoi(optarg);
+		   tfnd = 1;
+		   break;
+	       default: /* '?' */
+		   fprintf(stderr, "Usage: %s [-t nsecs] [-n] name\n",
+			   argv[0]);
+		   exit(EXIT_FAILURE);
+	       }
+	   }
+
+	   printf("flags=%d; tfnd=%d; optind=%d\n", flags, tfnd, optind);
+
+	   if (optind >= argc) {
+	       fprintf(stderr, "Expected argument after options\n");
+	       exit(EXIT_FAILURE);
+	   }
+
+	   printf("name argument = %s\n", argv[optind]);
+
+	   /* Other code omitted */
+
+	   exit(EXIT_SUCCESS);
+       }
+
+       The following example program illustrates the use of 1mgetopt_long22m() with
+       most of its features.
+
+       #include <stdio.h>     /* for printf */
+       #include <stdlib.h>    /* for exit */
+       #include <getopt.h>
+
+       int
+       main(int argc, char **argv)
+       {
+	   int c;
+	   int digit_optind = 0;
+
+	   while (1) {
+	       int this_option_optind = optind ? optind : 1;
+	       int option_index = 0;
+	       static struct option long_options[] = {
+		   {"add",     required_argument, 0,  0 },
+		   {"append",  no_argument,	  0,  0 },
+		   {"delete",  required_argument, 0,  0 },
+		   {"verbose", no_argument,	  0,  0 },
+		   {"create",  required_argument, 0, 'c'},
+		   {"file",    required_argument, 0,  0 },
+		   {0,	       0,		  0,  0 }
+	       };
+
+	       c = getopt_long(argc, argv, "abc:d:012",
+			long_options, &option_index);
+	       if (c == -1)
+		   break;
+
+	       switch (c) {
+	       case 0:
+		   printf("option %s", long_options[option_index].name);
+		   if (optarg)
+		       printf(" with arg %s", optarg);
+		   printf("\n");
+		   break;
+
+	       case '0':
+	       case '1':
+	       case '2':
+		   if (digit_optind != 0 && digit_optind != this_option_optind)
+		     printf("digits occur in two different argv-elements.\n");
+		   digit_optind = this_option_optind;
+		   printf("option %c\n", c);
+		   break;
+
+	       case 'a':
+		   printf("option a\n");
+		   break;
+
+	       case 'b':
+		   printf("option b\n");
+		   break;
+
+	       case 'c':
+		   printf("option c with value '%s'\n", optarg);
+		   break;
+
+	       case 'd':
+		   printf("option d with value '%s'\n", optarg);
+		   break;
+
+	       case '?':
+		   break;
+
+	       default:
+		   printf("?? getopt returned character code 0%o ??\n", c);
+	       }
+	   }
+
+	   if (optind < argc) {
+	       printf("non-option ARGV-elements: ");
+	       while (optind < argc)
+		   printf("%s ", argv[optind++]);
+	       printf("\n");
+	   }
+
+	   exit(EXIT_SUCCESS);
+       }
+
+1mSEE ALSO0m
+       1mgetsubopt22m(3)
+
+1mCOLOPHON0m
+       This  page  is  part of release 3.53 of the Linux 4mman-pages24m project.  A
+       description of the project, and information about reporting  bugs,  can
+       be found at http://www.kernel.org/doc/man-pages/.
+
+
+
+GNU				  2010-11-01			     GETOPT(3)
