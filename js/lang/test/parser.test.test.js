@@ -1,6 +1,6 @@
-import { inputStream } from "./istream";
-import { tokenStream } from "./tstream";
-import { parse } from "./parser";
+import { inputStream } from "../src/istream";
+import { tokenStream } from "../src/tstream";
+import { parse } from "../src/parser";
 
 QUnit.test("hello test", function(assert) {
     let istream = inputStream('lambda (x) 10');

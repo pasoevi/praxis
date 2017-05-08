@@ -1,5 +1,5 @@
-import { inputStream } from "./istream";
-import { tokenStream } from "./tstream";
+import { inputStream } from "../src/istream";
+import { tokenStream } from "../src/tstream";
 
 QUnit.test("hello test", function(assert) {
     let istream = inputStream('123');
