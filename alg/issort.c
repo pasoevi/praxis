@@ -3,6 +3,27 @@
 #include <string.h>
 #include "sort.h"
 
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+/* Implementation from Algorith Design Manual */
+void insertion_sort(int s[], int n)
+{
+    int i, j; /* counters */
+
+    for (i = 1; i < n; i++) {
+	j = i;
+	while ((j > 0) && (s[j] < s[j-1])) {
+	    swap(&s[j], &s[j-1]);
+	    j = j - 1;
+	}
+    }
+}
+
 int issort(void *data, size_t length, size_t esize,
            int (*compare)(const void  *key1, const void *key2))
 {

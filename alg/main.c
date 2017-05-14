@@ -9,25 +9,44 @@
 
 void sort_demo()
 {
+    /* Insertion sort demo*/
+    int numbers[] = {12, 4, 9, 3, 17, 0, 21};
+    printf("BEFORE: Insertion sort\n");
+    for (int i = 0; i < 7; i++) {
+	printf("%d ", numbers[i]);
+    }
+
+    printf("\n");
+
+    insertion_sort(numbers, 7);
+
+    for (int i = 0; i < 7; i++) {
+	printf("%d ", numbers[i]);
+    }
+
+    printf("\n");
+
+    /* Quick sort demo */
+
     int LEN = 7;
     int nums[] = {12, 4, 9, 3, 17, 0, 21};
     char *names[] = {"ani", "dato", "otari"};
     int i;
     
-    for (i = 0; i < LEN; i++) {
+    for (i = 0; i < 3; i++) {
         printf("%d, ", nums[i]);
     }
 
     putchar('\n');
-    qksort(nums, 7, sizeof(int),  0, 6, compareInt);
+    qksort(nums, LEN, sizeof(int),  0, 6, compareInt);
     for (i = 0; i < LEN; i++) {
         printf("%d, ", nums[i]);
     }
-
+    
     putchar('\n');
     int target = 12;
     /* Search for 12 using the binary search algorithm. */
-    int pos = bisearch(nums, &target, LEN, sizeof(int), compareInt);
+    // int pos = bisearch(nums, &target, LEN, sizeof(int), compareInt);
     // printf("Target is located at %d\n", pos);
 
     /* names */
@@ -76,8 +95,8 @@ void robotour_demo()
 
 int main(int argc, char *argv[])
 {
-    robotour_demo();
-    search_demo();
+    // robotour_demo();
+    // search_demo();
     sort_demo();
     
     return 0;
