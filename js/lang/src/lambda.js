@@ -1,9 +1,22 @@
+/*
+ * An input stream allows you to:
+ * 1) Get the next character (and move to the next character).
+ * 2) Get the next character (without moving to the next character).
+ * 3) Check if the input stream has ended.
+ * 4) Throw an error.
+ */
 function inputStream(input) {
     let pos = 0, line = 1, col = 0;
-   
+
     const next = function () {
-        let ch = input.charAt(pos++);
-        if (ch == "\n") line++, col = 0; else col++;
+        const ch = input.charAt(pos++);
+        if (ch === "\n") {
+            line++;
+            col = 0;
+        } else {
+            col++;
+        }
+
         return ch;
     };
 
@@ -12,7 +25,7 @@ function inputStream(input) {
     };
 
     const eof = function () {
-        return peek() == "";
+        return peek() === "";
     };
 
     const croak = function (msg) {
@@ -30,7 +43,7 @@ function inputStream(input) {
 function tokenStream(input) {
     let current = null;
     let keywords = " if then else lambda λ true false ";
-    
+
     const is_keyword = function (x) {
         return keywords.indexOf(" " + x + " ") >= 0;
     };
@@ -38,7 +51,7 @@ function tokenStream(input) {
     const is_digit = function (ch) {
         return /[0-9]/i.test(ch);
     };
-    
+
     const is_id_start = function (ch) {
         return /[a-zλ_]/i.test(ch);
     };
@@ -46,19 +59,19 @@ function tokenStream(input) {
     const is_id = function (ch) {
         return is_id_start(ch) || "?!-<>=0123456789".indexOf(ch) >= 0;
     };
-    
+
     const is_op_char = function (ch) {
         return "+-*/%=&|<>!".indexOf(ch) >= 0;
     };
-    
-    let  is_punc = function (ch) {
+
+    let is_punc = function (ch) {
         return ",;(){}[]".indexOf(ch) >= 0;
     };
 
     let is_whitespace = function (ch) {
         return " \t\n".indexOf(ch) >= 0;
     };
-    
+
     let read_while = function (predicate) {
         let str = "";
         while (!input.eof() && predicate(input.peek()))
@@ -169,7 +182,7 @@ function parse(input) {
         "+": 10, "-": 10,
         "*": 20, "/": 20, "%": 20,
     };
-    
+
     let is_punc = function (ch) {
         let tok = input.peek();
         return tok && tok.type == "punc" && (!ch || tok.value == ch) && tok;
@@ -272,7 +285,7 @@ function parse(input) {
             body: parse_expression()
         };
     };
-    
+
     let parse_bool = function () {
         return {
             type  : "bool",
@@ -318,13 +331,13 @@ function parse(input) {
 
     let parse_prog = function () {
         let prog = delimited("{", "}", ";", parse_expression);
-        if (prog.length == 0) return FALSE;
-        if (prog.length == 1) return prog[0];
+        if (prog.length === 0) return FALSE;
+        if (prog.length === 1) return prog[0];
         return { type: "prog", prog: prog };
     };
-    
+
     let parse_expression = function () {
-        return maybe_call(function(){
+        return maybe_call(function() {
             return maybe_binary(parse_atom(), 0);
         });
     };
@@ -332,10 +345,175 @@ function parse(input) {
     return parse_toplevel();
 }
 
+// Environment
+
+// function Environment(parent) {
+//     this.vars = Object.create(parent ? parent.vars : null);
+//     this.parent = parent;
+// }
+
+/*
+ * An environment, a scope to store local variables
+ */
+function environment(parent) {
+    let vars = Object.create(parent ? parent.vars : null);
+    return Object.freeze({
+        vars,
+        parent
+    });
+}
+
+environment.prototype = {
+    extend: function() {
+        return environment(this);
+    },
+    lookup: function(name) {
+        var scope = this;
+        while (scope) {
+            if (Object.prototype.hasOwnProperty.call(scope.vars, name))
+                return scope;
+            scope = scope.parent;
+        }
+    },
+    get: function(name) {
+        if (name in this.vars)
+            return this.vars[name];
+        throw new Error("Undefined variable " + name);
+    },
+    set: function(name, value) {
+        var scope = this.lookup(name);
+        if (!scope && this.parent)
+            throw new Error("Undefined variable " + name);
+        return (scope || this).vars[name] = value;
+    },
+    def: function(name, value) {
+        return this.vars[name] = value;
+    }
+};
+
+function evaluate(exp, env) {
+    switch (exp.type) {
+      case "num":
+      case "str":
+      case "bool":
+        return exp.value;
+
+      case "var":
+        return env.get(exp.value);
+
+      case "assign":
+        if (exp.left.type != "var")
+            throw new Error("Cannot assign to " + JSON.stringify(exp.left));
+        return env.set(exp.left.value, evaluate(exp.right, env));
+
+      case "binary":
+        return apply_op(exp.operator,
+                        evaluate(exp.left, env),
+                        evaluate(exp.right, env));
+
+      case "lambda":
+        return make_lambda(env, exp);
+
+      case "if":
+        var cond = evaluate(exp.cond, env);
+        if (cond !== false) return evaluate(exp.then, env);
+        return exp.else ? evaluate(exp.else, env) : false;
+
+      case "prog":
+        var val = false;
+        exp.prog.forEach(function(exp){ val = evaluate(exp, env) });
+        return val;
+
+      case "call":
+        var func = evaluate(exp.func, env);
+        return func.apply(null, exp.args.map(function(arg){
+            return evaluate(arg, env);
+        }));
+
+      default:
+        throw new Error("I don't know how to evaluate " + exp.type);
+    }
+}
+
+function apply_op(op, a, b) {
+    function num(x) {
+        if (typeof x != "number") {
+            throw new Error("Expected number but got " + x);
+          }
+        return x;
+    }
+    function div(x) {
+        if (num(x) === 0) {
+          throw new Error("Divide by zero");
+        }
+        return x;
+    }
+    switch (op) {
+      case "+": return num(a) + num(b);
+      case "-": return num(a) - num(b);
+      case "*": return num(a) * num(b);
+      case "/": return num(a) / div(b);
+      case "%": return num(a) % div(b);
+      case "&&": return a !== false && b;
+      case "||": return a !== false ? a : b;
+      case "<": return num(a) < num(b);
+      case ">": return num(a) > num(b);
+      case "<=": return num(a) <= num(b);
+      case ">=": return num(a) >= num(b);
+      case "==": return a === b;
+      case "!=": return a !== b;
+    }
+    throw new Error("Can't apply operator " + op);
+}
+
+function make_lambda(env, exp) {
+    function lambda() {
+        var names = exp.vars;
+        var scope = env.extend();
+        for (var i = 0; i < names.length; ++i) {
+            scope.def(names[i], i < arguments.length ? arguments[i] : false);
+          }
+        return evaluate(exp.body, scope);
+    }
+    return lambda;
+}
+
+/* -----[ entry point for NodeJS ]----- */
+
+// var globalEnv = environment();
+
+// globalEnv.def("time", function(func){
+//     try {
+//         console.time("time");
+//         return func();
+//     } finally {
+//         console.timeEnd("time");
+//     }
+// });
+
+// if (typeof process != "undefined") (function(){
+//     var util = require("util");
+//     globalEnv.def("println", function(val){
+//         util.puts(val);
+//     });
+//     globalEnv.def("print", function(val){
+//         util.print(val);
+//     });
+//     var code = "";
+//     process.stdin.setEncoding("utf8");
+//     process.stdin.on("readable", function(){
+//         var chunk = process.stdin.read();
+//         if (chunk) code += chunk;
+//     });
+//     process.stdin.on("end", function(){
+//         var ast = parse(TokenStream(InputStream(code)));
+//         evaluate(ast, globalEnv);
+//     });
+// })();
+
 let istream = inputStream('lambda (x) 10');
 let tstream = tokenStream(istream);
 
-   
+
 let parsed = parse(tstream);
 console.log(JSON.stringify(parsed));
-
