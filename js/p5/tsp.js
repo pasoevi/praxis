@@ -24,7 +24,7 @@ function draw() {
 
     // Draw cities
     cities.forEach(function (city) {
-	ellipse(city.x, city.y, 10, 10);
+	    ellipse(city.x, city.y, 10, 10);
     });
 
     // Draw paths between cities
@@ -53,9 +53,9 @@ function draw() {
 
     var d = calcDistance(cities);
     if (d < recordDistance) {
-	recordDistance = d;
-	bestSoFar = cities.slice();
-	console.log(recordDistance);
+	    recordDistance = d;
+	    bestSoFar = cities.slice();
+	    console.log(recordDistance);
     }
 
     
@@ -80,9 +80,9 @@ function calcDistance(points) {
     let sum = 0;
 
     for (let i = 0; i < points.length -1; i++) {
-	const nextPoint = points[i + 1];
-	const d = dist(points[i].x, points[i].y, nextPoint.x, nextPoint.y);
-	sum += d;
+        const nextPoint = points[i + 1];
+        const d = dist(points[i].x, points[i].y, nextPoint.x, nextPoint.y);
+        sum += d;
     }
 
     return sum;
