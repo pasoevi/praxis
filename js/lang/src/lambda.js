@@ -81,7 +81,7 @@ function tokenStream(input) {
 
     let read_number = function () {
         let has_dot = false;
-        let number = read_while(function(ch){
+        let number = read_while(function(ch) {
             if (ch == ".") {
                 if (has_dot) return false;
                 has_dot = true;
