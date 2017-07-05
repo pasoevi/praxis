@@ -6,7 +6,7 @@ A simple grammar parser.
 
 (require "list.rkt")
 
-(define *simple-grammar* '((sentence -> (noun-phrase verb-phase))
+(define *simple-grammar* '((sentence -> (noun-phrase verb-phrase))
                            (noun-phrase -> (article noun))
                            (verb-phrase -> (verb noun-phrase))
                            (article -> the a)
@@ -39,3 +39,4 @@ A simple grammar parser.
         [else (list phrase)]))
 
 (display (generate 'sentence))
+(newline)
