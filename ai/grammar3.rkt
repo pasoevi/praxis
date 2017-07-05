@@ -1,7 +1,7 @@
 #lang racket
 
 #|
-  A simple grammar parser.
+A simple grammar parser.
 |#
 
 (require "list.rkt")
@@ -31,11 +31,11 @@
 
 (define (generate phrase)
   "Generate a random sentence or phrase"
-  (display (list phrase (list? phrase)))
-  (newline)
+  ;; (display (list phrase (list? phrase)))
   ;; (newline)
-  (cond [(list? phrase) (map generate phrase)]
+  ;; (newline)
+  (cond [(list? phrase) (mappend generate phrase)]
         [(rewrites phrase) (generate (random-elt (rewrites phrase)))]
         [else (list phrase)]))
 
-(generate 'sentence)
+(display (generate 'sentence))

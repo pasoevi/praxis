@@ -1,6 +1,6 @@
 #lang racket
 
-(provide one-of random-elt contains)
+(provide one-of random-elt contains mappend)
 
 ;; List functions
 (define (one-of set)
@@ -14,3 +14,6 @@
 (define (contains ls elem)
   "Check if ls contains element elem"
   (> (length (filter (λ (x) (= x elem)) ls)) 0))
+
+(define (mappend f ls)
+  (apply append (map f ls)))
