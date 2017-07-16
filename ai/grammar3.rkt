@@ -13,7 +13,22 @@ A simple grammar parser.
                            (noun -> man ball woman table)
                            (verb -> hit took saw liked)))
 
-(define *grammar* *simple-grammar*)
+(define *bigger-grammar* '((sentence -> (noun-phrase verb-phrase))
+			   (noun-phrase -> (article adj* noun pp*) (name) (pronoun))
+                           (verb-phrase -> (verb noun-phrase pp*))
+			   (pp* -> () (pp pp*))
+			   (adj* -> () (adj adj*))
+			   (pp -> (prep noun-phrase))
+			   (prep -> to in by with on)
+			   (adj -> big little blue green adiabatic)
+                           (article -> the a)
+			   (name -> Pat Kim Lee Terry Robin)
+                           (noun -> man ball woman table)
+                           (verb -> hit took saw liked)
+			   (pronoun -> he she it these those that)))
+				     
+
+(define *grammar* *bigger-grammar*)
 
 (define (rule-lhs rule)
   "The left-hand side of a rule"
@@ -38,5 +53,16 @@ A simple grammar parser.
         [(rewrites phrase) (generate (random-elt (rewrites phrase)))]
         [else (list phrase)]))
 
-(display (generate 'sentence))
-(newline)
+(define (generate2 phrase)
+  "Generate a random sentence or phrase"
+  ;; (display (list phrase (list? phrase)))
+  ;; (newline)
+  ;; (newline)
+  (let ([choices (rewrites phrase)])
+    (cond [(list? phrase) (mappend generate phrase)]
+          [choices (generate (random-elt choices))]
+          [else (list phrase)])))
+
+
+  (display (generate2 'sentence))
+  (newline)
