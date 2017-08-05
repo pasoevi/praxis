@@ -1,6 +1,6 @@
 #lang racket
 
-(provide one-of random-elt contains mappend)
+(provide one-of random-elt contains mappend mapcar)
 
 ;; List functions
 (define (one-of set)
@@ -17,3 +17,6 @@
 
 (define (mappend f ls)
   (apply append (map f ls)))
+
+(define (mapcar f ls)
+  (apply car (map f ls)))
