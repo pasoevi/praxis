@@ -1,0 +1,34 @@
+<html>
+
+<head>
+  <title>Pbrush</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="toolbar">
+    <a id="dl" download="Canvas.png" href="#">Save</a>
+    <a id="reset" href="#">Reset</a>
+    <a id="random" href="#">Random</a>
+  </div>
+  <canvas id="canvas"></canvas>
+
+  <script src="paint.js"></script>
+  <!-- Vuejs -->
+  <script src="https://unpkg.com/vue"></script>
+
+  <div id="app">
+    {{ message }}
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!'
+      }
+    })
+  </script>
+</body>
+
+</html>

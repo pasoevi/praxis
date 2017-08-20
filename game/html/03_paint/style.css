@@ -1,0 +1,28 @@
+body {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.toolbar {
+  text-align: left;
+  width: 640px;
+  margin: 0 auto;
+}
+
+.toolbar a {
+  color: #000;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+.paint {
+  text-align: center;
+}
+
+.paint,
+#canvas {
+  text-align: center;
+  width: 640px;
+  height: 480px;
+}
