@@ -246,3 +246,7 @@ ModelManifest.xml
 .fake/
 
 compiled
+
+
+# Javascript
+node_modules

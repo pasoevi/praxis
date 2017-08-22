@@ -93,6 +93,10 @@ canvas.addEventListener("click", function(ev) {
   putDot(coords.x, coords.y);
 }, false);
 
+canvas.addEventListener("mousedown", function(ev) {
+
+}, false);
+
 document.getElementById("dl").addEventListener("click", dlCanvas, false);
 document.getElementById("reset").addEventListener("click", clearCanvas, false);
 document.getElementById("random").addEventListener("click", drawRandom, false);
