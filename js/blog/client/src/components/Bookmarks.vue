@@ -1,15 +1,23 @@
 <template>
-<div class="test">
-{{msg}}
+<div class="bookmarks">
+  <ul>
+    <li v-for="bookmark in bookmarks">{{bookmark.name}}</li>
+  </ul>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'test',
+  name: 'bookmarks',
   data () {
     return {
-      msg: 'Try different features here'
+      bookmarks: [{
+        name: 'Google'
+      },
+      {
+        name: 'Gutenberg'
+      }
+      ]
     }
   }
 }
@@ -17,22 +25,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-
 ul {
   list-style-type: none;
   padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
 }
 </style>

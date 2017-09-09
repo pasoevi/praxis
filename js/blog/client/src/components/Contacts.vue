@@ -1,15 +1,23 @@
 <template>
-<div class="test">
-{{msg}}
+<div class="contacts">
+  <ul>
+  <li v-for="contact in contacts">{{contact.name}}</li>
+</ul>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'test',
+  name: 'contacts',
   data () {
     return {
-      msg: 'Try different features here'
+      contacts: [{
+        name: 'Sergi'
+      },
+      {
+        name: 'Sylvain'
+      }
+      ]
     }
   }
 }
@@ -17,22 +25,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
 
 ul {
   list-style-type: none;
   padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
 }
 </style>

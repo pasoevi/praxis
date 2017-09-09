@@ -1,21 +1,24 @@
 <template>
-  <div id="app">
-    <!-- <toolbar></toolbar> -->
-    <sidebar></sidebar>
-    <router-view></router-view>
-  </div>
+<div id="app">
+  <toolbar></toolbar>
+  <sidebar></sidebar>
+  <router-view></router-view>
+</div>
 </template>
 
 <script>
-
 import Toolbar from './components/Toolbar.vue'
 import Sidebar from './components/Sidebar.vue'
+import Contacts from './components/Contacts.vue'
+import Bookmarks from './components/Bookmarks.vue'
 
 export default {
   name: 'app',
   components: {
     Toolbar,
-    Sidebar
+    Sidebar,
+    Contacts,
+    Bookmarks
   }
 }
 </script>
@@ -24,7 +27,6 @@ export default {
 body {
   margin: 0;
 }
-
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

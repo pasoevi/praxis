@@ -1,14 +1,29 @@
 <template>
-  <!-- Currently not used -->
-  <div class="toolbar">
-  </div>
+<!-- Currently not used -->
+<div class="toolbar">
+  <ul class="menu">
+    <li>
+      <router-link to="/">Home</router-link>
+    </li>
+    <li>
+      <router-link to="/test">Test</router-link>
+    </li>
+
+    <li>
+      <input v-model="url" @keyup.enter="submit">
+      <vue-frame text="Go" v-bind:url="url" frame="webview" type="button" class="form-control"></vue-frame>
+    </li>
+  </ul>
+</div>
 </template>
 
 <script>
 export default {
   name: 'toolbar',
+  props: ['content'],
   data () {
     return {
+      url: 'http://racket-lang.org',
       msg: 'Navigate across the Web here.'
     }
   }
@@ -21,7 +36,8 @@ export default {
   height: 20px;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 

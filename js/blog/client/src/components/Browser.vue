@@ -2,17 +2,6 @@
 <div class="browser">
 
   <div id="vue-frame">
-    <div class="toolbar">
-      <ul class="menu">
-        <li>Bookmarks</li>
-        <li>Contacts</li>
-        <li>History</li>
-        <li>
-          <input v-model="url" @keyup.enter="submit">
-          <vue-frame text="Go" v-bind:url="url" frame="webview" type="button" class="form-control"></vue-frame>
-        </li>
-      </ul>
-    </div>
     <iframe id="webview"></iframe>
   </div>
   <br>
