@@ -1,6 +1,9 @@
 # Build instructions
 ## Server
 ## Client
+### TODO
+
+- Longer url bar
 
 Run development version
 
@@ -8,5 +11,4 @@ Run development version
 npm install
 npm run dev
 ```
-
 # Development documentation

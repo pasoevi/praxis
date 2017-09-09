@@ -23,8 +23,9 @@ export default {
 .sidebard {
   width: 20%;
   background-color: #ccc;
-  height: 100%;
+  height: 600px;
   float: left;
+  margin: 0;
 }
 
 h1,

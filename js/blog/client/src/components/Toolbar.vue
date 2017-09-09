@@ -1,4 +1,5 @@
 <template>
+  <!-- Currently not used -->
   <div class="toolbar">
   </div>
 </template>
