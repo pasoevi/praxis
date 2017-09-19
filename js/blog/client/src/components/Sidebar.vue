@@ -1,6 +1,6 @@
 <template>
 <div class="sidebar">
-  <select v-model="content">
+  <select class="switcher" v-model="content">
     <option value="contacts">Contacts</option>
   <option value="bookmarks">Bookmarks</option>
   <option value="history">History</option>
@@ -39,7 +39,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 .sidebar {
   width: 20%;
   background-color: #ccc;
@@ -48,22 +48,14 @@ export default {
   margin: 0;
 }
 
-h1,
-h2 {
-  font-weight: normal;
+.sidebar .switcher {
+  width: 100%;
 }
 
-ul {
+.sidebar ul {
   list-style-type: none;
-  padding: 0;
-}
+  padding: 10px;
+  text-align: left;
 
-li {
-  /*display: inline-block;*/
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
 }
 </style>
