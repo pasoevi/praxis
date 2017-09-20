@@ -9,7 +9,7 @@
 <script>
 export default {
   name: 'contacts',
-  data () {
+  data() {
     return {
       contacts: [{
         name: 'Sergi'

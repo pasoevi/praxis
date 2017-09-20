@@ -9,7 +9,7 @@
 <script>
 export default {
   name: 'history',
-  data () {
+  data() {
     return {
       items: [{
         name: 'gmail.com'

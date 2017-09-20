@@ -7,7 +7,7 @@ module.exports = {
     sourceType: 'module'
   },
   env: {
-    browser: true,
+    browser: true
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
   extends: 'standard',
@@ -18,6 +18,11 @@ module.exports = {
   // add your custom rules here
   'rules': {
     // allow paren-less arrow functions
+    'space-before-function-paren': ['error', {
+      'anonymous': 'always',
+      'named': 'never',
+      'asyncArrow': 'always'
+    }],
     'arrow-parens': 0,
     // allow async-await
     'generator-star-spacing': 0,

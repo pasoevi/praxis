@@ -7,7 +7,7 @@
 <script>
 export default {
   name: 'test',
-  data () {
+  data() {
     return {
       msg: 'Try different features here'
     }

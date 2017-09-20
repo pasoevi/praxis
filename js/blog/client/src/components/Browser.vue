@@ -1,6 +1,6 @@
 <template>
 <div class="browser">
-
+<login></login>
   <div id="vue-frame">
     <iframe id="webview"></iframe>
   </div>
@@ -9,13 +9,15 @@
 </template>
 <script>
 import VueFrame from 'vue-frame'
+import Login from './Login.vue'
 
 export default {
   name: 'browser',
   components: {
-    VueFrame
+    VueFrame,
+    Login
   },
-  data () {
+  data() {
     return {
       url: 'http://racket-lang.org',
       msg: 'Welcome to Your Vue.js App'

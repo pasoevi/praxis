@@ -21,7 +21,7 @@
 export default {
   name: 'toolbar',
   props: ['content'],
-  data () {
+  data() {
     return {
       url: 'http://racket-lang.org',
       msg: 'Navigate across the Web here.'

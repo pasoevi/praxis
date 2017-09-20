@@ -30,7 +30,7 @@ export default {
     Bookmarks,
     History
   },
-  data () {
+  data() {
     return {
       content: 'contacts'
     }

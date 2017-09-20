@@ -9,7 +9,7 @@
 <script>
 export default {
   name: 'bookmarks',
-  data () {
+  data() {
     return {
       bookmarks: [{
         name: 'Google'

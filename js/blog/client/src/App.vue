@@ -25,7 +25,7 @@ export default {
     Contacts,
     Bookmarks
   },
-  data () {
+  data() {
     return {
       sidebarShown: false
     }
