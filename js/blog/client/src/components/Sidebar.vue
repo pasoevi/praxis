@@ -41,7 +41,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .sidebar {
-  width: 20%;
+  width: 30%;
   background-color: #ccc;
   height: 600px;
   float: left;

@@ -16,9 +16,8 @@
     },
     methods: {
       handleLogin() {
-        login('admin', 'admin1').then((user) => {
-//          this.publicBattles = battles;
-          alert(user)
+        login('admin', 'admin1').then((data) => {
+          localStorage.setItem('currentUser', JSON.stringify(data.user))
         })
       }
     }

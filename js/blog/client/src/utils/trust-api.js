@@ -1,15 +1,26 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:3333'
+const API_VERSION = 'v1'
+const BASE_URL = `http://localhost:8000/api/${API_VERSION}`
 
-export { getPublicStartupBattles, getPrivateStartupBattles }
-
-function getPublicStartupBattles () {
-  const url = `${BASE_URL}/api/battles/public`
-  return axios.get(url).then(response => response.data)
+const config = {
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+    // 'Access-Control-Allow-Origin': '*'
+  },
+  withCredentials: true
 }
 
-function getPrivateStartupBattles () {
+export { getContacts, getBookmarks }
+
+function getContacts() {
+  const url = `${BASE_URL}/get_contacts_list`
+  // return axios.get(url).then(response => response.data)
+  return axios.get(url, config).then(response => response.data)
+}
+
+function getBookmarks() {
   const url = `${BASE_URL}/api/battles/private`
   return axios.get(url).then(response => response.data)
 }
