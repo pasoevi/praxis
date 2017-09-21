@@ -12,10 +12,11 @@
       </thead>
       <tbody>
       <tr v-for="contact in contacts">
-        <td>{{ contact.username }}</td>
-        <td>{{ contact.username }}</td>
+        <td>{{ currentUser.pseudos[0].name }}</td>
+        <td>{{ contact.pseudos[0].name }}</td>
+        <td>{{ contact.pseudos[0].nickName }}</td>
         <td>{{ contact.registration_time }}</td>
-        <td>{{ contact.username }}</td>
+        <td>{{ contact.comment }}</td>
       </tr>
       </tbody>
     </table>
@@ -41,6 +42,12 @@
           self.contacts = data.contacts
           console.log(data.contacts)
         })
+      }
+    },
+    computed: {
+      // a computed getter
+      currentUser: function () {
+        return JSON.parse(localStorage.getItem('currentUser'))
       }
     },
     created: function () {
