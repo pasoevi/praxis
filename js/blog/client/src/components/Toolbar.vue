@@ -8,6 +8,9 @@
     <li>
       <router-link to="/test">Test</router-link>
     </li>
+    <li>
+      <router-link to="/contacts">Contacts</router-link>
+    </li>
 
     <li>
       <input v-model="url" @keyup.enter="submit">

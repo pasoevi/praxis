@@ -20,8 +20,7 @@
       </tr>
       </tbody>
     </table>
-    <ul>
-    </ul>
+    <router-link to="/invite/create">Invite</router-link>
   </div>
 </template>
 
