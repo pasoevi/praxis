@@ -36,10 +36,12 @@
   Name of the person: <br>
   <input type="text" v-model="name">
 
+  <button v-on:click="handleCreateInvitation">Invite</button>
+
 </div>
 </template>
 <script>
-import { login } from '../utils/trust-api'
+import { createInvitation } from '../utils/trust-api'
 
 export default {
   name: 'create-invite',
@@ -48,13 +50,18 @@ export default {
       msg: 'Create invitation',
       underPseudo: '',
       validFor: 0,
-      inviteType: '',
+      inviteType: 0,
       name: ''
     }
   },
   methods: {
-    handleCreateInvite() {
-      login('admin', 'admin1').then((data) => {
+    handleCreateInvitation() {
+      createInvitation({
+        inviterPseudo: this.underPseudo,
+        inviteType: this.inviteType,
+        comment: this.comment,
+        expires_at: 1
+      }).then((data) => {
         localStorage.setItem('currentUser', JSON.stringify(data.user))
       })
     }
@@ -70,13 +77,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-  a {
-    color: #42b983;
-  }
-
   .create-invite {
     text-align: left;
+    padding: 50px;
   }
 
   select {

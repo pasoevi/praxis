@@ -12,7 +12,7 @@ const config = {
   withCredentials: true
 }
 
-export { getContacts, getBookmarks }
+export { getContacts, getBookmarks, createInvitation }
 
 function getContacts() {
   const url = `${BASE_URL}/get_contacts_list`
@@ -23,4 +23,10 @@ function getContacts() {
 function getBookmarks() {
   const url = `${BASE_URL}/api/battles/private`
   return axios.get(url).then(response => response.data)
+}
+
+function createInvitation(invitation) {
+  const url = `${BASE_URL}/create_invitation`
+  // return axios.get(url).then(response => response.data)
+  return axios.post(url, {invitationData: invitation}, config).then(response => response.data)
 }
