@@ -36,6 +36,10 @@
   Name of the person: <br>
   <input type="text" v-model="name">
 
+  <br>
+  <span class="invitation-link" v-show="invitationLink">{{invitationLink}}</span>
+  <br>
+
   <button v-on:click="handleCreateInvitation">Invite</button>
 
 </div>
@@ -51,7 +55,8 @@ export default {
       underPseudo: '',
       validFor: 0,
       inviteType: 0,
-      name: ''
+      name: '',
+      invitationLink: ''
     }
   },
   methods: {
@@ -62,7 +67,7 @@ export default {
         comment: this.comment,
         expires_at: 1
       }).then((data) => {
-        localStorage.setItem('currentUser', JSON.stringify(data.user))
+        this.invitationLink = data.invitationLink
       })
     }
   },
@@ -85,5 +90,9 @@ export default {
 
   select {
     width: 190px;
+  }
+  
+  .invitation-link {
+    color: #3acb23;
   }
 </style>
