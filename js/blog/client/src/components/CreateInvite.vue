@@ -79,7 +79,8 @@ export default {
 <style scoped>
   .create-invite {
     text-align: left;
-    padding: 50px;
+    padding: 20px;
+    float: left;
   }
 
   select {
