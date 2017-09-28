@@ -91,7 +91,7 @@ export default {
   select {
     width: 190px;
   }
-  
+
   .invitation-link {
     color: #3acb23;
   }
