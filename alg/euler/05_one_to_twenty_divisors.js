@@ -31,7 +31,7 @@ while (smallestNum < 0) {
   // Check if n is divisible by all numbers in 'divisors'
   const goodDivisors = divisors.filter(div => n % div === 0);
   // console.log(`Good divisors: ${goodDivisors.length}/${divisors.length}`);
-  if (goodDivisors.length > divisors.length / 2) {
+  if (goodDivisors.length > divisors.length - 2) {
     console.log(`Divisible by: ${goodDivisors}`);
   }
 
