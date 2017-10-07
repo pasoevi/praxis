@@ -5,7 +5,7 @@ ctx.fillStyle = 'green';
 ctx.fillRect(0, 0, 640, 480);
 
 function putDot(x, y) {
-  console.log(`X: ${x}, Y: ${y}`);
+  // console.log(`X: ${x}, Y: ${y}`);
   ctx.fillStyle = 'black';
   ctx.fillRect(x, y, 3, 3);
 }
@@ -57,6 +57,7 @@ function relMouseCoords(event) {
     totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
     totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
   }
+  
   while (currentElement = currentElement.offsetParent)
 
   canvasX = event.pageX - totalOffsetX;
@@ -85,16 +86,24 @@ function dlCanvas() {
   this.href = dt;
 }
 
-canvas.addEventListener("click", function(ev) {
-  // coords = canvas.relMouseCoords(ev);
-  // alert(`X: ${canvasX}, Y: ${canvasY}`);
-  const coords = getMousePos(canvas, ev);
-
-  putDot(coords.x, coords.y);
+ccanvas.addEventListener("mousedown", function(ev) {
+    paint = true;
 }, false);
 
-canvas.addEventListener("mousedown", function(ev) {
+anvas.addEventListener("mouseup", function(ev) {
+    paint = false;
+}, false);
 
+let paint = false;
+
+canvas.addEventListener("mousemove", function(ev) {
+   console.log("ok"); 
+        if (paint) {
+            const coords = getMousePos(canvas, ev);
+
+            putDot(coords.x, coords.y);
+            console.log(`X: ${ev.clientX}, Y: ${ev.clientY}`);
+        }
 }, false);
 
 document.getElementById("dl").addEventListener("click", dlCanvas, false);
