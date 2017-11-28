@@ -1,9 +1,110 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8"/>
-    <title>Document</title>
-  </head>
-  <body>
-  </body>
+    <head>
+	<meta charset="UTF-8"/>
+	<title>Document</title>
+    </head>
+    <body>
+	<div id="app">
+	    <header>
+		<h1>Today's todo list:</h1>
+	    </header>
+	    <ul class="todo-list">
+		<li class="add-new">
+		    <input type="text" class="new-todo" v-model="newTodo" @keyup.enter="addNew" />
+		    <button @click="addNew">Add</button>
+		</li>
+
+		<li v-for="(item, i) in todos" class="todo-item" v-bind:class="{done: item.done}">
+		    <span v-if="options.showNumbers" class="number">{{i+1}}.</span>
+		    <span class="text" v-bind:class="{done: item.done}"> {{item.title}} </span>
+		    <input type="checkbox" class="state" v-model="item.done"/>
+		</li>
+	    </ul>
+	</div>
+	
+	<script src="../vue.js"></script>
+	
+	<script>
+	 const app = new Vue({
+	     el: '#app',
+	     data: {
+		 todos: [],
+		 newTodo: '',
+		 options: {
+		     showNumbers: false
+		 }
+	     },
+	     methods: {
+		 addNew() {
+		     this.todos.push({
+			 title: this.newTodo,
+			 done: false
+		     })
+		     this.newTodo = ''
+		     this.saveItems()
+		     
+		 },
+		 saveItems() {
+		     localStorage.setItem('todos', JSON.stringify(this.todos))
+		 }
+	     },
+	     created: function () {
+		 this.todos = JSON.parse(localStorage.getItem('todos')) || []
+	     }
+	     
+	 })
+	</script>
+	<style>
+
+	 html, body {
+	     margin: 0;
+	     padding: 0;
+	 }
+
+	 h1 {
+	     font-size: 18px;
+	     margin-top: 0;
+	 }
+	 
+
+	 #app {
+	     background-color: #eee;
+	     margin: 0 auto;
+	     max-width: 600px;
+	     padding: 30px;
+	 }
+
+	 .todo-list {
+	     list-style-type: none;
+	 }
+
+	 .todo-item {
+	     background-color: #fff;
+	     margin: 5px 0;
+	     padding: 10px 20px;
+	     border: 1px solid #ccc;
+	     box-shadow: 2px 2px 2px #ccc;
+	 }
+
+	 .done {
+	     text-decoration: line-through;
+	     color: #888;
+	 }
+
+	 .todo-item .state {
+	     float: right;
+	 }
+
+	 .todo-item input[type=checkbox] {
+	     appearance: none;
+	 }
+
+	 .add-new {
+	     margin-top: 10px;
+	 }
+	 
+	 
+	</style>
+    </body>
 </html>
