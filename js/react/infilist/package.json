@@ -1,0 +1,59 @@
+{
+  "name": "infilist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/test-shim.js",
+      "<rootDir>/test-setup.js"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/test-preprocessor.js"
+    },
+    "testMatch": [
+      "<rootDir>/src/**/*.(ts|tsx|js)"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^16.7.3",
+    "@types/react-dom": "^16.0.9",
+    "awesome-typescript-loader": "^5.2.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.1.6",
+    "webpack": "^4.25.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-info": "^4.0.6",
+    "@storybook/react": "^4.0.6",
+    "@types/enzyme": "^3.1.15",
+    "@types/jest": "^23.3.9",
+    "@types/storybook__react": "^4.0.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "jest": "^23.6.0",
+    "react-docgen-typescript-webpack-plugin": "^1.1.0",
+    "react-test-renderer": "^16.6.3",
+    "webpack-cli": "^3.1.2",
+    "@storybook/addon-actions": "^4.0.6",
+    "@storybook/addon-links": "^4.0.6",
+    "@storybook/addons": "^4.0.6",
+    "@babel/core": "^7.1.5",
+    "babel-loader": "^8.0.4"
+  }
+}
