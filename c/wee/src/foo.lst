@@ -1,0 +1,1037 @@
+GAS LISTING /tmp/ccAIfcn1.s 			page 1
+
+
+   1              		.file	"distance.c"
+   2              		.text
+   3              	.Ltext0:
+   4              		.globl	min2
+   6              	min2:
+   7              	.LFB2:
+   8              		.file 1 "distance.c"
+   1:distance.c    **** #include <string.h>
+   2:distance.c    **** #include "distance.h"
+   3:distance.c    **** 
+   4:distance.c    **** int min2(int a, int b){
+   9              		.loc 1 4 0
+  10              		.cfi_startproc
+  11 0000 55       		pushq	%rbp
+  12              		.cfi_def_cfa_offset 16
+  13              		.cfi_offset 6, -16
+  14 0001 4889E5   		movq	%rsp, %rbp
+  15              		.cfi_def_cfa_register 6
+  16 0004 897DFC   		movl	%edi, -4(%rbp)
+  17 0007 8975F8   		movl	%esi, -8(%rbp)
+   5:distance.c    **** 	if (a < b){
+  18              		.loc 1 5 0
+  19 000a 8B45FC   		movl	-4(%rbp), %eax
+  20 000d 3B45F8   		cmpl	-8(%rbp), %eax
+  21 0010 7D05     		jge	.L2
+   6:distance.c    **** 		return a;
+  22              		.loc 1 6 0
+  23 0012 8B45FC   		movl	-4(%rbp), %eax
+  24 0015 EB03     		jmp	.L3
+  25              	.L2:
+   7:distance.c    **** 	}else{
+   8:distance.c    **** 		return b;
+  26              		.loc 1 8 0
+  27 0017 8B45F8   		movl	-8(%rbp), %eax
+  28              	.L3:
+   9:distance.c    **** 	}
+  10:distance.c    **** }
+  29              		.loc 1 10 0
+  30 001a 5D       		popq	%rbp
+  31              		.cfi_def_cfa 7, 8
+  32 001b C3       		ret
+  33              		.cfi_endproc
+  34              	.LFE2:
+  36              		.globl	min3
+  38              	min3:
+  39              	.LFB3:
+  11:distance.c    **** 
+  12:distance.c    **** int min3(int a, int b, int c){
+  40              		.loc 1 12 0
+  41              		.cfi_startproc
+  42 001c 55       		pushq	%rbp
+  43              		.cfi_def_cfa_offset 16
+  44              		.cfi_offset 6, -16
+  45 001d 4889E5   		movq	%rsp, %rbp
+  46              		.cfi_def_cfa_register 6
+  47 0020 4883EC20 		subq	$32, %rsp
+  48 0024 897DEC   		movl	%edi, -20(%rbp)
+GAS LISTING /tmp/ccAIfcn1.s 			page 2
+
+
+  49 0027 8975E8   		movl	%esi, -24(%rbp)
+  50 002a 8955E4   		movl	%edx, -28(%rbp)
+  13:distance.c    **** 	int min_val = min_val = min2(a, b);
+  51              		.loc 1 13 0
+  52 002d 8B55E8   		movl	-24(%rbp), %edx
+  53 0030 8B45EC   		movl	-20(%rbp), %eax
+  54 0033 89D6     		movl	%edx, %esi
+  55 0035 89C7     		movl	%eax, %edi
+  56 0037 E8000000 		call	min2
+  56      00
+  57 003c 8945FC   		movl	%eax, -4(%rbp)
+  14:distance.c    **** 	return min2(min_val, c);
+  58              		.loc 1 14 0
+  59 003f 8B55E4   		movl	-28(%rbp), %edx
+  60 0042 8B45FC   		movl	-4(%rbp), %eax
+  61 0045 89D6     		movl	%edx, %esi
+  62 0047 89C7     		movl	%eax, %edi
+  63 0049 E8000000 		call	min2
+  63      00
+  15:distance.c    **** }
+  64              		.loc 1 15 0
+  65 004e C9       		leave
+  66              		.cfi_def_cfa 7, 8
+  67 004f C3       		ret
+  68              		.cfi_endproc
+  69              	.LFE3:
+  71              		.globl	levensteinDistance
+  73              	levensteinDistance:
+  74              	.LFB4:
+  16:distance.c    **** 
+  17:distance.c    **** int levensteinDistance(char *s, char *t){
+  75              		.loc 1 17 0
+  76              		.cfi_startproc
+  77 0050 55       		pushq	%rbp
+  78              		.cfi_def_cfa_offset 16
+  79              		.cfi_offset 6, -16
+  80 0051 4889E5   		movq	%rsp, %rbp
+  81              		.cfi_def_cfa_register 6
+  82 0054 4156     		pushq	%r14
+  83 0056 4155     		pushq	%r13
+  84 0058 4154     		pushq	%r12
+  85 005a 53       		pushq	%rbx
+  86 005b 4883C480 		addq	$-128, %rsp
+  87              		.cfi_offset 14, -24
+  88              		.cfi_offset 13, -32
+  89              		.cfi_offset 12, -40
+  90              		.cfi_offset 3, -48
+  91 005f 48897D98 		movq	%rdi, -104(%rbp)
+  92 0063 48897590 		movq	%rsi, -112(%rbp)
+  93 0067 4889E0   		movq	%rsp, %rax
+  94 006a 4989C4   		movq	%rax, %r12
+  18:distance.c    **** 	/* Test if the computation has to be made. */
+  19:distance.c    **** 	if(s == t){
+  95              		.loc 1 19 0
+  96 006d 488B4598 		movq	-104(%rbp), %rax
+  97 0071 483B4590 		cmpq	-112(%rbp), %rax
+  98 0075 750A     		jne	.L7
+GAS LISTING /tmp/ccAIfcn1.s 			page 3
+
+
+  20:distance.c    **** 		return 0;
+  99              		.loc 1 20 0
+ 100 0077 B8000000 		movl	$0, %eax
+ 100      00
+ 101 007c E9320200 		jmp	.L8
+ 101      00
+ 102              	.L7:
+  21:distance.c    **** 	}
+  22:distance.c    **** 	
+  23:distance.c    **** 	int len_s = strlen(s);
+ 103              		.loc 1 23 0
+ 104 0081 488B4598 		movq	-104(%rbp), %rax
+ 105 0085 4889C7   		movq	%rax, %rdi
+ 106 0088 E8000000 		call	strlen
+ 106      00
+ 107 008d 8945D4   		movl	%eax, -44(%rbp)
+  24:distance.c    **** 	int len_t = strlen(t);
+ 108              		.loc 1 24 0
+ 109 0090 488B4590 		movq	-112(%rbp), %rax
+ 110 0094 4889C7   		movq	%rax, %rdi
+ 111 0097 E8000000 		call	strlen
+ 111      00
+ 112 009c 8945D0   		movl	%eax, -48(%rbp)
+  25:distance.c    **** 
+  26:distance.c    **** 	if(len_s == 0 || len_t == 0){
+ 113              		.loc 1 26 0
+ 114 009f 837DD400 		cmpl	$0, -44(%rbp)
+ 115 00a3 7406     		je	.L9
+ 116              		.loc 1 26 0 is_stmt 0 discriminator 1
+ 117 00a5 837DD000 		cmpl	$0, -48(%rbp)
+ 118 00a9 750A     		jne	.L10
+ 119              	.L9:
+  27:distance.c    **** 		return 0;
+ 120              		.loc 1 27 0 is_stmt 1
+ 121 00ab B8000000 		movl	$0, %eax
+ 121      00
+ 122 00b0 E9FE0100 		jmp	.L8
+ 122      00
+ 123              	.L10:
+  28:distance.c    **** 	}
+  29:distance.c    **** 	
+  30:distance.c    **** 	
+  31:distance.c    **** 	/* vectors of integer distances */
+  32:distance.c    **** 	int v0[len_t];
+ 124              		.loc 1 32 0
+ 125 00b5 8B45D0   		movl	-48(%rbp), %eax
+ 126 00b8 4863D0   		movslq	%eax, %rdx
+ 127 00bb 4883EA01 		subq	$1, %rdx
+ 128 00bf 488955C8 		movq	%rdx, -56(%rbp)
+ 129 00c3 4863D0   		movslq	%eax, %rdx
+ 130 00c6 48895580 		movq	%rdx, -128(%rbp)
+ 131 00ca 48C74588 		movq	$0, -120(%rbp)
+ 131      00000000 
+ 132 00d2 4863D0   		movslq	%eax, %rdx
+ 133 00d5 48899570 		movq	%rdx, -144(%rbp)
+ 133      FFFFFF
+ 134 00dc 48C78578 		movq	$0, -136(%rbp)
+GAS LISTING /tmp/ccAIfcn1.s 			page 4
+
+
+ 134      FFFFFF00 
+ 134      000000
+ 135 00e7 4898     		cltq
+ 136 00e9 48C1E002 		salq	$2, %rax
+ 137 00ed 488D5003 		leaq	3(%rax), %rdx
+ 138 00f1 B8100000 		movl	$16, %eax
+ 138      00
+ 139 00f6 4883E801 		subq	$1, %rax
+ 140 00fa 4801D0   		addq	%rdx, %rax
+ 141 00fd BB100000 		movl	$16, %ebx
+ 141      00
+ 142 0102 BA000000 		movl	$0, %edx
+ 142      00
+ 143 0107 48F7F3   		divq	%rbx
+ 144 010a 486BC010 		imulq	$16, %rax, %rax
+ 145 010e 4829C4   		subq	%rax, %rsp
+ 146 0111 4889E0   		movq	%rsp, %rax
+ 147 0114 4883C003 		addq	$3, %rax
+ 148 0118 48C1E802 		shrq	$2, %rax
+ 149 011c 48C1E002 		salq	$2, %rax
+ 150 0120 488945C0 		movq	%rax, -64(%rbp)
+  33:distance.c    **** 	int v1[len_t];
+ 151              		.loc 1 33 0
+ 152 0124 8B45D0   		movl	-48(%rbp), %eax
+ 153 0127 4863D0   		movslq	%eax, %rdx
+ 154 012a 4883EA01 		subq	$1, %rdx
+ 155 012e 488955B8 		movq	%rdx, -72(%rbp)
+ 156 0132 4863D0   		movslq	%eax, %rdx
+ 157 0135 48899560 		movq	%rdx, -160(%rbp)
+ 157      FFFFFF
+ 158 013c 48C78568 		movq	$0, -152(%rbp)
+ 158      FFFFFF00 
+ 158      000000
+ 159 0147 4863D0   		movslq	%eax, %rdx
+ 160 014a 4989D5   		movq	%rdx, %r13
+ 161 014d 41BE0000 		movl	$0, %r14d
+ 161      0000
+ 162 0153 4898     		cltq
+ 163 0155 48C1E002 		salq	$2, %rax
+ 164 0159 488D5003 		leaq	3(%rax), %rdx
+ 165 015d B8100000 		movl	$16, %eax
+ 165      00
+ 166 0162 4883E801 		subq	$1, %rax
+ 167 0166 4801D0   		addq	%rdx, %rax
+ 168 0169 BE100000 		movl	$16, %esi
+ 168      00
+ 169 016e BA000000 		movl	$0, %edx
+ 169      00
+ 170 0173 48F7F6   		divq	%rsi
+ 171 0176 486BC010 		imulq	$16, %rax, %rax
+ 172 017a 4829C4   		subq	%rax, %rsp
+ 173 017d 4889E0   		movq	%rsp, %rax
+ 174 0180 4883C003 		addq	$3, %rax
+ 175 0184 48C1E802 		shrq	$2, %rax
+ 176 0188 48C1E002 		salq	$2, %rax
+ 177 018c 488945B0 		movq	%rax, -80(%rbp)
+  34:distance.c    **** 
+GAS LISTING /tmp/ccAIfcn1.s 			page 5
+
+
+  35:distance.c    **** 	/* Initialise the v0 (the previous row of distances. This row
+  36:distance.c    **** 	   is A[0][i]: edit distance for an empty s the distance is
+  37:distance.c    **** 	   just the number of characters to delete from t
+  38:distance.c    **** 	*/
+  39:distance.c    **** 	int i;
+  40:distance.c    **** 	for(i = 0; i < len_t; i++){
+ 178              		.loc 1 40 0
+ 179 0190 C745DC00 		movl	$0, -36(%rbp)
+ 179      000000
+ 180 0197 EB14     		jmp	.L11
+ 181              	.L12:
+  41:distance.c    **** 		v0[i] = i;
+ 182              		.loc 1 41 0 discriminator 3
+ 183 0199 488B45C0 		movq	-64(%rbp), %rax
+ 184 019d 8B55DC   		movl	-36(%rbp), %edx
+ 185 01a0 4863D2   		movslq	%edx, %rdx
+ 186 01a3 8B4DDC   		movl	-36(%rbp), %ecx
+ 187 01a6 890C90   		movl	%ecx, (%rax,%rdx,4)
+  40:distance.c    **** 		v0[i] = i;
+ 188              		.loc 1 40 0 discriminator 3
+ 189 01a9 8345DC01 		addl	$1, -36(%rbp)
+ 190              	.L11:
+  40:distance.c    **** 		v0[i] = i;
+ 191              		.loc 1 40 0 is_stmt 0 discriminator 1
+ 192 01ad 8B45DC   		movl	-36(%rbp), %eax
+ 193 01b0 3B45D0   		cmpl	-48(%rbp), %eax
+ 194 01b3 7CE4     		jl	.L12
+  42:distance.c    **** 	}
+  43:distance.c    **** 
+  44:distance.c    **** 	
+  45:distance.c    **** 	for(i = 0; i < len_s; i++){
+ 195              		.loc 1 45 0 is_stmt 1
+ 196 01b5 C745DC00 		movl	$0, -36(%rbp)
+ 196      000000
+ 197 01bc E9D90000 		jmp	.L13
+ 197      00
+ 198              	.L18:
+ 199              	.LBB2:
+  46:distance.c    **** 		/* Calculate v1 (current row distances) from the previous row v0.
+  47:distance.c    **** 		 * The first element of v1 is A[i+1][0]
+  48:distance.c    **** 		 * edit distance is delete (i+1) chars from s to match empty t 
+  49:distance.c    **** 		 */
+  50:distance.c    **** 
+  51:distance.c    **** 		v1[0] = i + 1;
+ 200              		.loc 1 51 0
+ 201 01c1 8B45DC   		movl	-36(%rbp), %eax
+ 202 01c4 8D5001   		leal	1(%rax), %edx
+ 203 01c7 488B45B0 		movq	-80(%rbp), %rax
+ 204 01cb 8910     		movl	%edx, (%rax)
+  52:distance.c    **** 
+  53:distance.c    **** 		/* Use the formula to fill in the rest of the row */
+  54:distance.c    **** 		int j;
+  55:distance.c    **** 		for(j = 0; j < len_t; j++){
+ 205              		.loc 1 55 0
+ 206 01cd C745D800 		movl	$0, -40(%rbp)
+ 206      000000
+ 207 01d4 E9820000 		jmp	.L14
+GAS LISTING /tmp/ccAIfcn1.s 			page 6
+
+
+ 207      00
+ 208              	.L15:
+ 209              	.LBB3:
+  56:distance.c    **** 			int cost = (s[i] == t[j])? 0 : 1;
+ 210              		.loc 1 56 0 discriminator 3
+ 211 01d9 8B45DC   		movl	-36(%rbp), %eax
+ 212 01dc 4863D0   		movslq	%eax, %rdx
+ 213 01df 488B4598 		movq	-104(%rbp), %rax
+ 214 01e3 4801D0   		addq	%rdx, %rax
+ 215 01e6 0FB610   		movzbl	(%rax), %edx
+ 216 01e9 8B45D8   		movl	-40(%rbp), %eax
+ 217 01ec 4863C8   		movslq	%eax, %rcx
+ 218 01ef 488B4590 		movq	-112(%rbp), %rax
+ 219 01f3 4801C8   		addq	%rcx, %rax
+ 220 01f6 0FB600   		movzbl	(%rax), %eax
+ 221 01f9 38C2     		cmpb	%al, %dl
+ 222 01fb 0F95C0   		setne	%al
+ 223 01fe 0FB6C0   		movzbl	%al, %eax
+ 224 0201 8945AC   		movl	%eax, -84(%rbp)
+  57:distance.c    **** 			v1[j+1] = min3(v1[i] + 1, v0[j+1] + 1, v0[j] + cost);
+ 225              		.loc 1 57 0 discriminator 3
+ 226 0204 8B45D8   		movl	-40(%rbp), %eax
+ 227 0207 8D5801   		leal	1(%rax), %ebx
+ 228 020a 488B45C0 		movq	-64(%rbp), %rax
+ 229 020e 8B55D8   		movl	-40(%rbp), %edx
+ 230 0211 4863D2   		movslq	%edx, %rdx
+ 231 0214 8B1490   		movl	(%rax,%rdx,4), %edx
+ 232 0217 8B45AC   		movl	-84(%rbp), %eax
+ 233 021a 8D3402   		leal	(%rdx,%rax), %esi
+ 234 021d 8B45D8   		movl	-40(%rbp), %eax
+ 235 0220 8D5001   		leal	1(%rax), %edx
+ 236 0223 488B45C0 		movq	-64(%rbp), %rax
+ 237 0227 4863D2   		movslq	%edx, %rdx
+ 238 022a 8B0490   		movl	(%rax,%rdx,4), %eax
+ 239 022d 8D4801   		leal	1(%rax), %ecx
+ 240 0230 488B45B0 		movq	-80(%rbp), %rax
+ 241 0234 8B55DC   		movl	-36(%rbp), %edx
+ 242 0237 4863D2   		movslq	%edx, %rdx
+ 243 023a 8B0490   		movl	(%rax,%rdx,4), %eax
+ 244 023d 83C001   		addl	$1, %eax
+ 245 0240 89F2     		movl	%esi, %edx
+ 246 0242 89CE     		movl	%ecx, %esi
+ 247 0244 89C7     		movl	%eax, %edi
+ 248 0246 E8000000 		call	min3
+ 248      00
+ 249 024b 89C1     		movl	%eax, %ecx
+ 250 024d 488B45B0 		movq	-80(%rbp), %rax
+ 251 0251 4863D3   		movslq	%ebx, %rdx
+ 252 0254 890C90   		movl	%ecx, (%rax,%rdx,4)
+ 253              	.LBE3:
+  55:distance.c    **** 			int cost = (s[i] == t[j])? 0 : 1;
+ 254              		.loc 1 55 0 discriminator 3
+ 255 0257 8345D801 		addl	$1, -40(%rbp)
+ 256              	.L14:
+  55:distance.c    **** 			int cost = (s[i] == t[j])? 0 : 1;
+ 257              		.loc 1 55 0 is_stmt 0 discriminator 1
+ 258 025b 8B45D8   		movl	-40(%rbp), %eax
+GAS LISTING /tmp/ccAIfcn1.s 			page 7
+
+
+ 259 025e 3B45D0   		cmpl	-48(%rbp), %eax
+ 260 0261 0F8C72FF 		jl	.L15
+ 260      FFFF
+  58:distance.c    **** 		}
+  59:distance.c    **** 
+  60:distance.c    **** 		/* Copy v1 (current row) to v0 (previous row) for next
+  61:distance.c    **** 		   iteration
+  62:distance.c    **** 		*/
+  63:distance.c    **** 		for(j = 0; j < len_t; j++){
+ 261              		.loc 1 63 0 is_stmt 1
+ 262 0267 C745D800 		movl	$0, -40(%rbp)
+ 262      000000
+ 263 026e EB1E     		jmp	.L16
+ 264              	.L17:
+  64:distance.c    **** 			v0[j] = v1[j];
+ 265              		.loc 1 64 0 discriminator 3
+ 266 0270 488B45B0 		movq	-80(%rbp), %rax
+ 267 0274 8B55D8   		movl	-40(%rbp), %edx
+ 268 0277 4863D2   		movslq	%edx, %rdx
+ 269 027a 8B0C90   		movl	(%rax,%rdx,4), %ecx
+ 270 027d 488B45C0 		movq	-64(%rbp), %rax
+ 271 0281 8B55D8   		movl	-40(%rbp), %edx
+ 272 0284 4863D2   		movslq	%edx, %rdx
+ 273 0287 890C90   		movl	%ecx, (%rax,%rdx,4)
+  63:distance.c    **** 			v0[j] = v1[j];
+ 274              		.loc 1 63 0 discriminator 3
+ 275 028a 8345D801 		addl	$1, -40(%rbp)
+ 276              	.L16:
+  63:distance.c    **** 			v0[j] = v1[j];
+ 277              		.loc 1 63 0 is_stmt 0 discriminator 1
+ 278 028e 8B45D8   		movl	-40(%rbp), %eax
+ 279 0291 3B45D0   		cmpl	-48(%rbp), %eax
+ 280 0294 7CDA     		jl	.L17
+ 281              	.LBE2:
+  45:distance.c    **** 		/* Calculate v1 (current row distances) from the previous row v0.
+ 282              		.loc 1 45 0 is_stmt 1 discriminator 2
+ 283 0296 8345DC01 		addl	$1, -36(%rbp)
+ 284              	.L13:
+  45:distance.c    **** 		/* Calculate v1 (current row distances) from the previous row v0.
+ 285              		.loc 1 45 0 is_stmt 0 discriminator 1
+ 286 029a 8B45DC   		movl	-36(%rbp), %eax
+ 287 029d 3B45D4   		cmpl	-44(%rbp), %eax
+ 288 02a0 0F8C1BFF 		jl	.L18
+ 288      FFFF
+  65:distance.c    **** 		}
+  66:distance.c    **** 	}
+  67:distance.c    **** 	return v1[len_t];
+ 289              		.loc 1 67 0 is_stmt 1
+ 290 02a6 488B45B0 		movq	-80(%rbp), %rax
+ 291 02aa 8B55D0   		movl	-48(%rbp), %edx
+ 292 02ad 4863D2   		movslq	%edx, %rdx
+ 293 02b0 8B0490   		movl	(%rax,%rdx,4), %eax
+ 294              	.L8:
+ 295 02b3 4C89E4   		movq	%r12, %rsp
+  68:distance.c    **** }
+ 296              		.loc 1 68 0
+ 297 02b6 488D65E0 		leaq	-32(%rbp), %rsp
+GAS LISTING /tmp/ccAIfcn1.s 			page 8
+
+
+ 298 02ba 5B       		popq	%rbx
+ 299 02bb 415C     		popq	%r12
+ 300 02bd 415D     		popq	%r13
+ 301 02bf 415E     		popq	%r14
+ 302 02c1 5D       		popq	%rbp
+ 303              		.cfi_def_cfa 7, 8
+ 304 02c2 C3       		ret
+ 305              		.cfi_endproc
+ 306              	.LFE4:
+ 308              	.Letext0:
+GAS LISTING /tmp/ccAIfcn1.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 distance.c
+     /tmp/ccAIfcn1.s:6      .text:0000000000000000 min2
+     /tmp/ccAIfcn1.s:38     .text:000000000000001c min3
+     /tmp/ccAIfcn1.s:73     .text:0000000000000050 levensteinDistance
+
+UNDEFINED SYMBOLS
+strlen
+GAS LISTING /tmp/ccAIfcn1.s 			page 1
+
+
+   1              		.file	"history.c"
+   2              		.text
+   3              	.Ltext0:
+   4              		.section	.rodata
+   5              	.LC0:
+   6 0000 6100     		.string	"a"
+   7 0002 00000000 		.align 8
+   7      0000
+   8              	.LC1:
+   9 0008 4572726F 		.string	"Error opening the history file: "
+   9      72206F70 
+   9      656E696E 
+   9      67207468 
+   9      65206869 
+  10              	.LC2:
+  11 0029 25730A00 		.string	"%s\n"
+  12              		.text
+  13              		.globl	append_line
+  15              	append_line:
+  16              	.LFB0:
+  17              		.file 1 "history.c"
+   1:history.c     **** #include <stdio.h>
+   2:history.c     **** #include <errno.h>
+   3:history.c     **** 
+   4:history.c     **** int append_line(char *word, char *history_file){
+  18              		.loc 1 4 0
+  19              		.cfi_startproc
+  20 0000 55       		pushq	%rbp
+  21              		.cfi_def_cfa_offset 16
+  22              		.cfi_offset 6, -16
+  23 0001 4889E5   		movq	%rsp, %rbp
+  24              		.cfi_def_cfa_register 6
+  25 0004 4883EC20 		subq	$32, %rsp
+  26 0008 48897DE8 		movq	%rdi, -24(%rbp)
+  27 000c 488975E0 		movq	%rsi, -32(%rbp)
+   5:history.c     **** 	int errnum = 0;
+  28              		.loc 1 5 0
+  29 0010 C745FC00 		movl	$0, -4(%rbp)
+  29      000000
+   6:history.c     **** 	FILE *fp = fopen(history_file, "a");
+  30              		.loc 1 6 0
+  31 0017 488B45E0 		movq	-32(%rbp), %rax
+  32 001b BE000000 		movl	$.LC0, %esi
+  32      00
+  33 0020 4889C7   		movq	%rax, %rdi
+  34 0023 E8000000 		call	fopen
+  34      00
+  35 0028 488945F0 		movq	%rax, -16(%rbp)
+   7:history.c     **** 
+   8:history.c     **** 	if(fp == NULL){
+  36              		.loc 1 8 0
+  37 002c 48837DF0 		cmpq	$0, -16(%rbp)
+  37      00
+  38 0031 7516     		jne	.L2
+   9:history.c     **** 		errnum = errno;
+  39              		.loc 1 9 0
+  40 0033 E8000000 		call	__errno_location
+GAS LISTING /tmp/ccAIfcn1.s 			page 2
+
+
+  40      00
+  41 0038 8B00     		movl	(%rax), %eax
+  42 003a 8945FC   		movl	%eax, -4(%rbp)
+  10:history.c     **** 		perror("Error opening the history file: ");
+  43              		.loc 1 10 0
+  44 003d BF000000 		movl	$.LC1, %edi
+  44      00
+  45 0042 E8000000 		call	perror
+  45      00
+  46 0047 EB26     		jmp	.L3
+  47              	.L2:
+  11:history.c     **** 	}else{
+  12:history.c     **** 		fprintf(fp, "%s\n", word);
+  48              		.loc 1 12 0
+  49 0049 488B55E8 		movq	-24(%rbp), %rdx
+  50 004d 488B45F0 		movq	-16(%rbp), %rax
+  51 0051 BE000000 		movl	$.LC2, %esi
+  51      00
+  52 0056 4889C7   		movq	%rax, %rdi
+  53 0059 B8000000 		movl	$0, %eax
+  53      00
+  54 005e E8000000 		call	fprintf
+  54      00
+  13:history.c     **** 		fclose(fp);
+  55              		.loc 1 13 0
+  56 0063 488B45F0 		movq	-16(%rbp), %rax
+  57 0067 4889C7   		movq	%rax, %rdi
+  58 006a E8000000 		call	fclose
+  58      00
+  59              	.L3:
+  14:history.c     **** 	}
+  15:history.c     **** 
+  16:history.c     **** 	return errnum;
+  60              		.loc 1 16 0
+  61 006f 8B45FC   		movl	-4(%rbp), %eax
+  17:history.c     **** }
+  62              		.loc 1 17 0
+  63 0072 C9       		leave
+  64              		.cfi_def_cfa 7, 8
+  65 0073 C3       		ret
+  66              		.cfi_endproc
+  67              	.LFE0:
+  69              		.globl	add_to_history
+  71              	add_to_history:
+  72              	.LFB1:
+  18:history.c     **** 	
+  19:history.c     **** 
+  20:history.c     **** int add_to_history(char *word, char *history_file){
+  73              		.loc 1 20 0
+  74              		.cfi_startproc
+  75 0074 55       		pushq	%rbp
+  76              		.cfi_def_cfa_offset 16
+  77              		.cfi_offset 6, -16
+  78 0075 4889E5   		movq	%rsp, %rbp
+  79              		.cfi_def_cfa_register 6
+  80 0078 4883EC20 		subq	$32, %rsp
+  81 007c 48897DE8 		movq	%rdi, -24(%rbp)
+GAS LISTING /tmp/ccAIfcn1.s 			page 3
+
+
+  82 0080 488975E0 		movq	%rsi, -32(%rbp)
+  21:history.c     **** 	int errnum = append_line(word, history_file);
+  83              		.loc 1 21 0
+  84 0084 488B55E0 		movq	-32(%rbp), %rdx
+  85 0088 488B45E8 		movq	-24(%rbp), %rax
+  86 008c 4889D6   		movq	%rdx, %rsi
+  87 008f 4889C7   		movq	%rax, %rdi
+  88 0092 E8000000 		call	append_line
+  88      00
+  89 0097 8945FC   		movl	%eax, -4(%rbp)
+  22:history.c     **** 	return errnum;
+  90              		.loc 1 22 0
+  91 009a 8B45FC   		movl	-4(%rbp), %eax
+  23:history.c     **** }
+  92              		.loc 1 23 0
+  93 009d C9       		leave
+  94              		.cfi_def_cfa 7, 8
+  95 009e C3       		ret
+  96              		.cfi_endproc
+  97              	.LFE1:
+  99              	.Letext0:
+ 100              		.file 2 "/usr/lib/gcc/x86_64-linux-gnu/4.9/include/stddef.h"
+ 101              		.file 3 "/usr/include/x86_64-linux-gnu/bits/types.h"
+ 102              		.file 4 "/usr/include/stdio.h"
+ 103              		.file 5 "/usr/include/libio.h"
+GAS LISTING /tmp/ccAIfcn1.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 history.c
+     /tmp/ccAIfcn1.s:15     .text:0000000000000000 append_line
+     /tmp/ccAIfcn1.s:71     .text:0000000000000074 add_to_history
+
+UNDEFINED SYMBOLS
+fopen
+__errno_location
+perror
+fprintf
+fclose
+GAS LISTING /tmp/ccAIfcn1.s 			page 1
+
+
+   1              		.file	"wee.c"
+   2              		.text
+   3              	.Ltext0:
+   4              		.globl	lookup
+   6              	lookup:
+   7              	.LFB2:
+   8              		.file 1 "wee.c"
+   1:wee.c         **** /*
+   2:wee.c         ****  * wee.c
+   3:wee.c         ****  *
+   4:wee.c         ****  *  Created on: 17 Nov 2015
+   5:wee.c         ****  *      Author: sergi
+   6:wee.c         ****  */
+   7:wee.c         **** 
+   8:wee.c         **** #include <stdio.h>
+   9:wee.c         **** #include <stdlib.h>
+  10:wee.c         **** #include <ctype.h>
+  11:wee.c         **** #include <getopt.h>
+  12:wee.c         **** /* #include <wordexp.h> */
+  13:wee.c         **** #include "distance.h"
+  14:wee.c         **** 
+  15:wee.c         **** int reverseString(char *source, char *destination, int size);
+  16:wee.c         **** 
+  17:wee.c         **** int lookup(char *word, char **definition, int dictionary){
+   9              		.loc 1 17 0
+  10              		.cfi_startproc
+  11 0000 55       		pushq	%rbp
+  12              		.cfi_def_cfa_offset 16
+  13              		.cfi_offset 6, -16
+  14 0001 4889E5   		movq	%rsp, %rbp
+  15              		.cfi_def_cfa_register 6
+  16 0004 48897DF8 		movq	%rdi, -8(%rbp)
+  17 0008 488975F0 		movq	%rsi, -16(%rbp)
+  18 000c 8955EC   		movl	%edx, -20(%rbp)
+  18:wee.c         **** 	return 0;
+  19              		.loc 1 18 0
+  20 000f B8000000 		movl	$0, %eax
+  20      00
+  19:wee.c         **** }
+  21              		.loc 1 19 0
+  22 0014 5D       		popq	%rbp
+  23              		.cfi_def_cfa 7, 8
+  24 0015 C3       		ret
+  25              		.cfi_endproc
+  26              	.LFE2:
+  28              		.section	.rodata
+  29              	.LC0:
+  30 0000 2F686F6D 		.string	"/home/sergi/.weehist"
+  30      652F7365 
+  30      7267692F 
+  30      2E776565 
+  30      68697374 
+  31 0015 000000   		.align 8
+  32              	.LC1:
+  33 0018 4F707469 		.string	"Option -%c requires an argument.\n"
+  33      6F6E202D 
+  33      25632072 
+GAS LISTING /tmp/ccAIfcn1.s 			page 2
+
+
+  33      65717569 
+  33      72657320 
+  34              	.LC2:
+  35 003a 556E6B6E 		.string	"Unknown option `-%c'.\n"
+  35      6F776E20 
+  35      6F707469 
+  35      6F6E2060 
+  35      2D256327 
+  36 0051 00000000 		.align 8
+  36      000000
+  37              	.LC3:
+  38 0058 556E6B6E 		.string	"Unknown option character `\\x%x'.\n"
+  38      6F776E20 
+  38      6F707469 
+  38      6F6E2063 
+  38      68617261 
+  39              	.LC4:
+  40 007a 6862633A 		.string	"hbc:"
+  40      00
+  41 007f 00       		.align 8
+  42              	.LC5:
+  43 0080 61646468 		.string	"addhistflag = %d, bflag = %d, cvalue = %s\n"
+  43      69737466 
+  43      6C616720 
+  43      3D202564 
+  43      2C206266 
+  44              	.LC6:
+  45 00ab 4E6F6E2D 		.string	"Non-option argument %s\n"
+  45      6F707469 
+  45      6F6E2061 
+  45      7267756D 
+  45      656E7420 
+  46              	.LC7:
+  47 00c3 6572726F 		.string	"error: %d\n"
+  47      723A2025 
+  47      640A00
+  48              		.text
+  49              		.globl	main
+  51              	main:
+  52              	.LFB3:
+  20:wee.c         **** 
+  21:wee.c         **** int main(int argc, char **argv){
+  53              		.loc 1 21 0
+  54              		.cfi_startproc
+  55 0016 55       		pushq	%rbp
+  56              		.cfi_def_cfa_offset 16
+  57              		.cfi_offset 6, -16
+  58 0017 4889E5   		movq	%rsp, %rbp
+  59              		.cfi_def_cfa_register 6
+  60 001a 4883EC40 		subq	$64, %rsp
+  61 001e 897DCC   		movl	%edi, -52(%rbp)
+  62 0021 488975C0 		movq	%rsi, -64(%rbp)
+  22:wee.c         **** 	char *hist_fname = "/home/sergi/.weehist";
+  63              		.loc 1 22 0
+  64 0025 48C745E0 		movq	$.LC0, -32(%rbp)
+  64      00000000 
+  23:wee.c         **** 	int addhistflag;
+GAS LISTING /tmp/ccAIfcn1.s 			page 3
+
+
+  24:wee.c         **** 	int bflag;
+  25:wee.c         **** 	char *cvalue = NULL;
+  65              		.loc 1 25 0
+  66 002d 48C745F0 		movq	$0, -16(%rbp)
+  66      00000000 
+  26:wee.c         **** 
+  27:wee.c         **** 	int index;
+  28:wee.c         **** 	int c;
+  29:wee.c         **** 
+  30:wee.c         **** 	opterr = 0;
+  67              		.loc 1 30 0
+  68 0035 C7050000 		movl	$0, opterr(%rip)
+  68      00000000 
+  68      0000
+  31:wee.c         **** 
+  32:wee.c         **** 	while((c = getopt(argc, argv, "hbc:")) != -1){
+  69              		.loc 1 32 0
+  70 003f E9EE0000 		jmp	.L4
+  70      00
+  71              	.L15:
+  33:wee.c         **** 		switch(c){
+  72              		.loc 1 33 0
+  73 0044 8B45DC   		movl	-36(%rbp), %eax
+  74 0047 83F862   		cmpl	$98, %eax
+  75 004a 7429     		je	.L6
+  76 004c 83F862   		cmpl	$98, %eax
+  77 004f 7F0A     		jg	.L7
+  78 0051 83F83F   		cmpl	$63, %eax
+  79 0054 743B     		je	.L8
+  80 0056 E9D20000 		jmp	.L5
+  80      00
+  81              	.L7:
+  82 005b 83F863   		cmpl	$99, %eax
+  83 005e 7421     		je	.L9
+  84 0060 83F868   		cmpl	$104, %eax
+  85 0063 0F85C400 		jne	.L5
+  85      0000
+  34:wee.c         **** 		case 'h':
+  35:wee.c         **** 			addhistflag = 1;
+  86              		.loc 1 35 0
+  87 0069 C745FC01 		movl	$1, -4(%rbp)
+  87      000000
+  36:wee.c         **** 			break;
+  88              		.loc 1 36 0
+  89 0070 E9BD0000 		jmp	.L4
+  89      00
+  90              	.L6:
+  37:wee.c         **** 		case 'b':
+  38:wee.c         **** 			bflag = 1;
+  91              		.loc 1 38 0
+  92 0075 C745F801 		movl	$1, -8(%rbp)
+  92      000000
+  39:wee.c         **** 			break;
+  93              		.loc 1 39 0
+  94 007c E9B10000 		jmp	.L4
+  94      00
+  95              	.L9:
+GAS LISTING /tmp/ccAIfcn1.s 			page 4
+
+
+  40:wee.c         **** 		case 'c':
+  41:wee.c         **** 			cvalue = optarg;
+  96              		.loc 1 41 0
+  97 0081 488B0500 		movq	optarg(%rip), %rax
+  97      000000
+  98 0088 488945F0 		movq	%rax, -16(%rbp)
+  42:wee.c         **** 			break;
+  99              		.loc 1 42 0
+ 100 008c E9A10000 		jmp	.L4
+ 100      00
+ 101              	.L8:
+  43:wee.c         **** 		case '?':
+  44:wee.c         **** 			if(optopt == 'c'){
+ 102              		.loc 1 44 0
+ 103 0091 8B050000 		movl	optopt(%rip), %eax
+ 103      0000
+ 104 0097 83F863   		cmpl	$99, %eax
+ 105 009a 7521     		jne	.L11
+  45:wee.c         **** 				fprintf(stderr, "Option -%c requires an argument.\n", optopt);
+ 106              		.loc 1 45 0
+ 107 009c 8B150000 		movl	optopt(%rip), %edx
+ 107      0000
+ 108 00a2 488B0500 		movq	stderr(%rip), %rax
+ 108      000000
+ 109 00a9 BE000000 		movl	$.LC1, %esi
+ 109      00
+ 110 00ae 4889C7   		movq	%rax, %rdi
+ 111 00b1 B8000000 		movl	$0, %eax
+ 111      00
+ 112 00b6 E8000000 		call	fprintf
+ 112      00
+ 113 00bb EB66     		jmp	.L12
+ 114              	.L11:
+  46:wee.c         **** 			}else if(isprint(optopt)){
+ 115              		.loc 1 46 0
+ 116 00bd E8000000 		call	__ctype_b_loc
+ 116      00
+ 117 00c2 488B00   		movq	(%rax), %rax
+ 118 00c5 8B150000 		movl	optopt(%rip), %edx
+ 118      0000
+ 119 00cb 4863D2   		movslq	%edx, %rdx
+ 120 00ce 4801D2   		addq	%rdx, %rdx
+ 121 00d1 4801D0   		addq	%rdx, %rax
+ 122 00d4 0FB700   		movzwl	(%rax), %eax
+ 123 00d7 0FB7C0   		movzwl	%ax, %eax
+ 124 00da 25004000 		andl	$16384, %eax
+ 124      00
+ 125 00df 85C0     		testl	%eax, %eax
+ 126 00e1 7421     		je	.L13
+  47:wee.c         **** 				fprintf(stderr, "Unknown option `-%c'.\n", optopt);
+ 127              		.loc 1 47 0
+ 128 00e3 8B150000 		movl	optopt(%rip), %edx
+ 128      0000
+ 129 00e9 488B0500 		movq	stderr(%rip), %rax
+ 129      000000
+ 130 00f0 BE000000 		movl	$.LC2, %esi
+ 130      00
+GAS LISTING /tmp/ccAIfcn1.s 			page 5
+
+
+ 131 00f5 4889C7   		movq	%rax, %rdi
+ 132 00f8 B8000000 		movl	$0, %eax
+ 132      00
+ 133 00fd E8000000 		call	fprintf
+ 133      00
+ 134 0102 EB1F     		jmp	.L12
+ 135              	.L13:
+  48:wee.c         **** 			}else{
+  49:wee.c         **** 				fprintf(stderr, "Unknown option character `\\x%x'.\n", optopt);
+ 136              		.loc 1 49 0
+ 137 0104 8B150000 		movl	optopt(%rip), %edx
+ 137      0000
+ 138 010a 488B0500 		movq	stderr(%rip), %rax
+ 138      000000
+ 139 0111 BE000000 		movl	$.LC3, %esi
+ 139      00
+ 140 0116 4889C7   		movq	%rax, %rdi
+ 141 0119 B8000000 		movl	$0, %eax
+ 141      00
+ 142 011e E8000000 		call	fprintf
+ 142      00
+ 143              	.L12:
+  50:wee.c         **** 			}
+  51:wee.c         **** 			return 1;
+ 144              		.loc 1 51 0
+ 145 0123 B8010000 		movl	$1, %eax
+ 145      00
+ 146 0128 E9D00000 		jmp	.L14
+ 146      00
+ 147              	.L5:
+  52:wee.c         **** 		default:
+  53:wee.c         **** 			abort();
+ 148              		.loc 1 53 0
+ 149 012d E8000000 		call	abort
+ 149      00
+ 150              	.L4:
+  32:wee.c         **** 		switch(c){
+ 151              		.loc 1 32 0
+ 152 0132 488B4DC0 		movq	-64(%rbp), %rcx
+ 153 0136 8B45CC   		movl	-52(%rbp), %eax
+ 154 0139 BA000000 		movl	$.LC4, %edx
+ 154      00
+ 155 013e 4889CE   		movq	%rcx, %rsi
+ 156 0141 89C7     		movl	%eax, %edi
+ 157 0143 E8000000 		call	getopt
+ 157      00
+ 158 0148 8945DC   		movl	%eax, -36(%rbp)
+ 159 014b 837DDCFF 		cmpl	$-1, -36(%rbp)
+ 160 014f 0F85EFFE 		jne	.L15
+ 160      FFFF
+  54:wee.c         **** 		}
+  55:wee.c         **** 	}
+  56:wee.c         **** 
+  57:wee.c         **** 	printf ("addhistflag = %d, bflag = %d, cvalue = %s\n",
+ 161              		.loc 1 57 0
+ 162 0155 488B4DF0 		movq	-16(%rbp), %rcx
+ 163 0159 8B55F8   		movl	-8(%rbp), %edx
+GAS LISTING /tmp/ccAIfcn1.s 			page 6
+
+
+ 164 015c 8B45FC   		movl	-4(%rbp), %eax
+ 165 015f 89C6     		movl	%eax, %esi
+ 166 0161 BF000000 		movl	$.LC5, %edi
+ 166      00
+ 167 0166 B8000000 		movl	$0, %eax
+ 167      00
+ 168 016b E8000000 		call	printf
+ 168      00
+  58:wee.c         **** 		addhistflag, bflag, cvalue);
+  59:wee.c         **** 
+  60:wee.c         **** 	for (index = optind; index < argc; index++){
+ 169              		.loc 1 60 0
+ 170 0170 8B050000 		movl	optind(%rip), %eax
+ 170      0000
+ 171 0176 8945EC   		movl	%eax, -20(%rbp)
+ 172 0179 EB75     		jmp	.L16
+ 173              	.L18:
+  61:wee.c         **** 		printf ("Non-option argument %s\n", argv[index]);
+ 174              		.loc 1 61 0
+ 175 017b 8B45EC   		movl	-20(%rbp), %eax
+ 176 017e 4898     		cltq
+ 177 0180 488D14C5 		leaq	0(,%rax,8), %rdx
+ 177      00000000 
+ 178 0188 488B45C0 		movq	-64(%rbp), %rax
+ 179 018c 4801D0   		addq	%rdx, %rax
+ 180 018f 488B00   		movq	(%rax), %rax
+ 181 0192 4889C6   		movq	%rax, %rsi
+ 182 0195 BF000000 		movl	$.LC6, %edi
+ 182      00
+ 183 019a B8000000 		movl	$0, %eax
+ 183      00
+ 184 019f E8000000 		call	printf
+ 184      00
+  62:wee.c         **** 		if(addhistflag){
+ 185              		.loc 1 62 0
+ 186 01a4 837DFC00 		cmpl	$0, -4(%rbp)
+ 187 01a8 7442     		je	.L17
+ 188              	.LBB2:
+  63:wee.c         **** 			int errnum;
+  64:wee.c         **** 			errnum = add_to_history(argv[index], hist_fname);
+ 189              		.loc 1 64 0
+ 190 01aa 8B45EC   		movl	-20(%rbp), %eax
+ 191 01ad 4898     		cltq
+ 192 01af 488D14C5 		leaq	0(,%rax,8), %rdx
+ 192      00000000 
+ 193 01b7 488B45C0 		movq	-64(%rbp), %rax
+ 194 01bb 4801D0   		addq	%rdx, %rax
+ 195 01be 488B00   		movq	(%rax), %rax
+ 196 01c1 488B55E0 		movq	-32(%rbp), %rdx
+ 197 01c5 4889D6   		movq	%rdx, %rsi
+ 198 01c8 4889C7   		movq	%rax, %rdi
+ 199 01cb B8000000 		movl	$0, %eax
+ 199      00
+ 200 01d0 E8000000 		call	add_to_history
+ 200      00
+ 201 01d5 8945D8   		movl	%eax, -40(%rbp)
+  65:wee.c         **** 			printf("error: %d\n", errnum);
+GAS LISTING /tmp/ccAIfcn1.s 			page 7
+
+
+ 202              		.loc 1 65 0
+ 203 01d8 8B45D8   		movl	-40(%rbp), %eax
+ 204 01db 89C6     		movl	%eax, %esi
+ 205 01dd BF000000 		movl	$.LC7, %edi
+ 205      00
+ 206 01e2 B8000000 		movl	$0, %eax
+ 206      00
+ 207 01e7 E8000000 		call	printf
+ 207      00
+ 208              	.L17:
+ 209              	.LBE2:
+  60:wee.c         **** 		printf ("Non-option argument %s\n", argv[index]);
+ 210              		.loc 1 60 0 discriminator 2
+ 211 01ec 8345EC01 		addl	$1, -20(%rbp)
+ 212              	.L16:
+  60:wee.c         **** 		printf ("Non-option argument %s\n", argv[index]);
+ 213              		.loc 1 60 0 is_stmt 0 discriminator 1
+ 214 01f0 8B45EC   		movl	-20(%rbp), %eax
+ 215 01f3 3B45CC   		cmpl	-52(%rbp), %eax
+ 216 01f6 7C83     		jl	.L18
+  66:wee.c         **** 		}
+  67:wee.c         **** 		
+  68:wee.c         **** 	}
+  69:wee.c         **** 
+  70:wee.c         **** 
+  71:wee.c         **** 		
+  72:wee.c         **** 	/* printf("Distance [%s - %s]: %d\n", argv[index-2], argv[index-1], levensteinDistance(argv[index-
+  73:wee.c         **** 	
+  74:wee.c         **** 
+  75:wee.c         **** 	return 0;
+ 217              		.loc 1 75 0 is_stmt 1
+ 218 01f8 B8000000 		movl	$0, %eax
+ 218      00
+ 219              	.L14:
+  76:wee.c         **** }
+ 220              		.loc 1 76 0
+ 221 01fd C9       		leave
+ 222              		.cfi_def_cfa 7, 8
+ 223 01fe C3       		ret
+ 224              		.cfi_endproc
+ 225              	.LFE3:
+ 227              	.Letext0:
+ 228              		.file 2 "/usr/lib/gcc/x86_64-linux-gnu/4.9/include/stddef.h"
+ 229              		.file 3 "/usr/include/x86_64-linux-gnu/bits/types.h"
+ 230              		.file 4 "/usr/include/libio.h"
+ 231              		.file 5 "/usr/include/stdio.h"
+ 232              		.file 6 "/usr/include/getopt.h"
+ 233              		.file 7 "/usr/include/ctype.h"
+GAS LISTING /tmp/ccAIfcn1.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 wee.c
+     /tmp/ccAIfcn1.s:6      .text:0000000000000000 lookup
+     /tmp/ccAIfcn1.s:51     .text:0000000000000016 main
+
+UNDEFINED SYMBOLS
+opterr
+optarg
+optopt
+stderr
+fprintf
+__ctype_b_loc
+abort
+getopt
+printf
+optind
+add_to_history

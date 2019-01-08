@@ -1,0 +1,25 @@
+import sys
+cc = 'gcc'
+ccflags = '-g -pg'
+linkflags='-pg'
+
+if sys.platform == 'win32':
+   ccflags += " -mwindows"
+
+
+libs = Split(' m')
+if sys.platform == 'win32':
+   libs.insert(0, 'mingw32')
+
+build_dir = 'build'
+VariantDir(build_dir, 'src', duplicate=0)
+env = Environment(CC = cc,
+                  CCFLAGS = ccflags,
+                  LINKFLAGS=linkflags,
+                  tools=['default', 'mingw'],
+                  TARFLAGS = '-c -z')
+src_files = Glob('build/*.c')
+env.Program(source=src_files,
+            LIBS=libs,
+            target='build/wee')
+# Clean('.', build_dir)

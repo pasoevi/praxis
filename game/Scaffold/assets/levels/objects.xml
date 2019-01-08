@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+  
+<OBJECTS>
+  <object type="Sprite" x="0" y="400" width="128" height="95"
+	  textureFile="graphics/bricks.png" numFrames="1"/>
+  <object type="Sprite" x="128" y="400" width="128" height="95"
+	  textureFile="graphics/bricks.png" numFrames="1"/>
+  <object type="Sprite" x="256" y="400" width="128" height="94"
+	  textureFile="graphics/bricks.png" numFrames="1"/>
+  <object type="Sprite" x="384" y="400" width="128" height="95"
+	  textureFile="graphics/bricks.png" numFrames="1"/>
+  <object type="Sprite" x="640" y="400" width="128" height="95"
+	  textureFile="graphics/bricks.png" numFrames="1"/>
+  <object type="Sprite" x="768" y="400" width="128" height="95"
+	  textureFile="graphics/bricks.png" numFrames="1"/>
+  
+</OBJECTS>

@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<level>
+<dishImage>graphics/dishes/xachapuri.png</dishImage>
+
+<ingredients>
+	<ingredient id="1" group="3">
+		<name>ფქვილი</name>
+		<image>graphics/ingredients/flour.png</image>
+		<steps>
+			<step>1</step>
+			<step>2</step>
+		</steps>
+	</ingredient>
+	<ingredient id="2" group="1">
+		<name>წყალი</name>
+		<image>graphics/ingredients/water.png</image>
+		<steps>
+			<step>1</step>
+			<step>2</step>
+		</steps>
+	</ingredient>
+	<ingredient id="3" group="3">
+		<name>ყველი</name>
+		<image>graphics/ingredients/chease.png</image>
+		<steps>
+			<step>3</step>			
+		</steps>
+	</ingredient>
+	<ingredient id="4" group="2">
+		<name>ბანანი</name>
+		<image>graphics/ingredients/banana.png</image>
+		<steps />
+	</ingredient>
+	<ingredient id="5" group="1">
+		<name>ალუბალი</name>
+		<image>graphics/ingredients/cherry.png</image>
+		<steps />
+	</ingredient>
+	<ingredient id="6" group="3">
+		<name>კომბოსტო</name>
+		<image>graphics/ingredients/cabbage.png</image>
+		<steps />
+	</ingredient>
+	<ingredient id="7" group="2">
+		<name>ფორთოხალი</name>
+		<image>graphics/ingredients/orange.png</image>
+		<steps />
+	</ingredient>
+	<ingredient id="8" group="3">
+		<name>სტაფილო</name>
+		<image>graphics/ingredients/carrot.png</image>
+		<steps />
+	</ingredient>
+</ingredients>
+
+<dishStates>
+	<dishState>
+		<image>graphics/dishes/water.png</image>
+		<ingredientIDs>
+			<id>2</id>
+		</ingredientIDs>
+	</dishState>
+	<dishState>
+		<image>graphics/dishes/flour.png</image>
+		<ingredientIDs>
+			<id>1</id>
+		</ingredientIDs>
+	</dishState>
+	<dishState>
+		<image>graphics/dishes/flour-water.png</image>
+		<ingredientIDs>
+			<id>1</id>
+			<id>2</id>
+		</ingredientIDs>
+	</dishState>
+</dishStates>
+</level>

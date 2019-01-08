@@ -1,0 +1,42 @@
+#:kivy 1.8.0
+
+<FoodFactoryGame>:
+    paddle: player
+    separator: separator
+
+    WindowSeparator:
+        id: separator
+        x: root.width - (root.width / 4) - self.width
+        height: root.height
+            
+    FoodPaddle:
+        id: player
+        x: root.width * (3/8) - self.width / 2
+        center_x: 0
+        
+
+
+
+<WindowSeparator>:
+    size: 5, root.height
+    canvas:
+        Rectangle:
+            pos:self.pos
+            size:self.size
+
+<FoodPaddle>:
+    size: 64, 24
+    canvas: 
+        Rectangle:
+            pos:self.pos
+            size:self.size
+
+<FoodIngredient>
+    size: 32, 32
+    icon: 'ingredient1.png'
+    canvas:
+        Rectangle:
+            pos:self.pos
+            size:self.size
+            
+    
