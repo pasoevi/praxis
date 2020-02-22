@@ -1,0 +1,34 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+        "type": "gulp",
+        "task": "default",
+        "problemMatcher": [],
+        "options": {
+            "cwd": "${workspaceFolder}/writing"
+        },
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        }
+    }
+]
+  // "tasks": [
+  //     {
+  //         "label": "Compile Markdown",
+  //         "type": "shell",
+  //         "command": "markdown-it jsfacts.md -o jsfacts.html",
+  //         "options": {
+  //             "cwd": "${workspaceFolder}/writing"
+  //         },
+  //         "group": {
+  //             "kind": "build",
+  //             "isDefault": true
+  //         },
+  //         "problemMatcher": []
+  //     }
+  // ]
+}

@@ -1,0 +1,35 @@
+<h1>Facts</h1>
+<h2>Object creation</h2>
+<ol>
+<li>
+<p>Object literal</p>
+<pre><code class="language-JS">const obj = {}
+// Same as
+Object.create(null)
+</code></pre>
+</li>
+<li>
+<p>Object constructor (Not recommended)</p>
+<pre><code class="language-JS">const obj = new Object();
+</code></pre>
+</li>
+<li>
+<p>Object.create</p>
+<p>A prototype can be passed to the Object.create  function</p>
+<pre><code class="language-JS">const obj = Object.create();
+</code></pre>
+</li>
+<li>
+<p>Function constructor</p>
+<pre><code class="language-JS">function Person(name, address) {
+    const obj = {};
+    obj.name = name;
+    obj.address = address;
+    return obj;
+}
+
+const john = new Person(&quot;Josh&quot;, &quot;12, Rawl Rue 87923&quot;);
+
+</code></pre>
+</li>
+</ol>
