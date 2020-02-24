@@ -1,0 +1,23 @@
+.currency {
+    position: relative;
+    margin: 0.6em;
+    padding: 0.6em;
+    background-color: #ababab;
+    height: 1.2em;
+}
+
+.deselect {
+    position: absolute;
+    border-radius: 50%;
+    width: 1.1em;
+    height: 1.1em;
+    top: 0;
+    right: 0;
+    color: #fff;
+    font-size: 0.7em;
+    background-color: #000;
+}
+
+.title {
+    color: #000;
+}
