@@ -1,0 +1,19 @@
+$iconSize: 1em;
+
+:global(body) {
+    background: #222;
+    color: white;
+}
+
+.container {
+    font-weight: bold;
+}
+
+.container:before {
+    background: url("./check-icon.png?download");
+    width: calc($iconSize * 2);
+    height: calc($iconSize * 2);
+    display: inline-block;
+    background-size: cover;
+    content: "";
+}

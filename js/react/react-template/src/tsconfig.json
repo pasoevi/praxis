@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "alwaysStrict": true,
+        "strict": true,
+        "jsx": "react",
+        "target": "es6",
+        "moduleResolution": "node",
+    },
+}
