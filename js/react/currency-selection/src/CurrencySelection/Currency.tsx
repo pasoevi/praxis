@@ -1,5 +1,6 @@
-import * as styles from "./currencyComponent.module.css";
+import * as styles from "./Currency.module.css";
 import React from "react";
+import classNames from "classnames";
 
 export enum IsoCurrency {
   EUR = "EUR",
@@ -26,12 +27,14 @@ export interface CurrencyComponentProps {
 export const CurrencyComponent: React.FC<CurrencyComponentProps> = (props) => {
   const { currency, onChange } = props;
   return (
-    <div className={styles["currency"]} onClick={() => onChange(currency, !currency.selected)}>
+    <div className={classNames(styles["currency"], {
+      [styles["selected"]]: currency.selected,
+    })} onClick={() => onChange(currency, !currency.selected)}>
       <input
         name="isSelected"
         type="checkbox"
+        onChange={() => { /* handled in onClick of component root div*/}}
         checked={currency.selected}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(currency, e.target.checked)}
       />
       <div className={styles.title}>{currency.isoCurrency}</div>
     </div>

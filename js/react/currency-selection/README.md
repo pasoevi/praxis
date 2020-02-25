@@ -1,35 +1,34 @@
-# Running
+# Currency Selection
 
-In the project directory, you can run:
+It is possible to specify maximum number currencies that can be selected ( `MaxCurrencies` in `src\currencySelection\currencySelection.tsx`)
+
+## Running in development mode
+
+In the project directory, run:
 
 `yarn install`
-`yarn start`
 
-Runs the app in the development mode.
+`yarn start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-# Run tests
+## Run tests
+
+Tests are written using `jest` and `enzyme`.
 
 `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-# Build for production
+## Build for production
 
  `yarn build`
 
-Builds the app for production to the `build` folder.
-The build is minified and the filenames include the hashes.
+Builds the minified app for production to `build`.
 
-# Things to improve
+## Things to improve
 
-## Add stricter rules for eslint
-## Use .d.ts for css instead of *.module.css
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Add stricter rules for eslint
+* Configure css loader to not need module in css files.
+* Add data-* attributes to select elements from tests (but
+  configure babel to remove them when building for production)or
+  mock CSS Modules https://jestjs.io/docs/en/webpack#mocking-css-modules
+* Setup visual testing using webdriver.io

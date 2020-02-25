@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import { IsoCurrency } from './currencySelection/currencyComponent';
-import { CurrencySelection } from './currencySelection/currencySelection';
+import { IsoCurrency } from './CurrencySelection/Currency';
+import { CurrencySelection } from './CurrencySelection/CurrencySelection';
 
 const currencies = [
   IsoCurrency.CZK,
@@ -14,8 +14,6 @@ const currencies = [
   IsoCurrency.SEK,
   IsoCurrency.USD,
 ];
-
-
 
 function App() {
   return (
