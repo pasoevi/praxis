@@ -1,19 +1,19 @@
-import React from 'react'
+import * as styles from "./currencySelection.module.css";
+import React from "react";
 import {
-  CurrencyComponentProps,
+  Currency,
   CurrencyComponent,
+  CurrencyComponentProps,
   IsoCurrency,
-  SelectedCurrencyComponent,
-  Currency
-} from './currencyComponent'
-import * as styles from './currencySelection.module.css'
+} from "./currencyComponent";
+import { SelectedCurrencyComponent } from "./selectedCurrencyComponent";
 
 export interface CurrencySelectionState {
-  currencies: Array<Currency>
+  currencies: Array<Currency>;
 }
 
 export interface CurrencySelectionProps {
-  currencies: Array<IsoCurrency>
+  currencies: Array<IsoCurrency>;
 }
 
 export interface SelectedCurrenciesProps {
@@ -22,7 +22,7 @@ export interface SelectedCurrenciesProps {
 }
 
 export interface CurrencyProps {
-  currencies: Array<CurrencyComponentProps>
+  currencies: Array<CurrencyComponentProps>;
 }
 
 export class CurrencySelection extends React.Component<
@@ -30,32 +30,37 @@ export class CurrencySelection extends React.Component<
   CurrencySelectionState
 > {
   constructor(props: CurrencySelectionProps) {
-    super(props)
+    super(props);
 
     this.state = {
-      currencies: props.currencies.map(c => ({
+      currencies: props.currencies.map((c) => ({
         isoCurrency: c,
-        selected: false
-      }))
-    }
+        selected: false,
+      })),
+    };
   }
 
-  onCurrencyChanged = (currency: Currency, selected: boolean) => {
-    const newCurrencies = this.state.currencies.map(c => c.isoCurrency === currency.isoCurrency ? {...c, selected: selected}: c);
+  onCurrencyChanged = (currency: Currency, selected: boolean): void => {
+    const newCurrencies = this.state.currencies.map((c) =>
+      c.isoCurrency === currency.isoCurrency ? { ...c, selected: selected } : c
+    );
     this.setState({
       currencies: newCurrencies,
     });
-  }
+  };
 
   render() {
     const currencies = this.state.currencies;
-    const selectedCurrencies = currencies.filter(c => c.selected);
+    const selectedCurrencies = currencies.filter((c) => c.selected);
     return (
       <div className={styles["currencySelection"]}>
-        <SelectedCurrencies currencies={selectedCurrencies} onChange={this.onCurrencyChanged}/>
-        <AvailableCurrencies currencies={currencies} />
+        <SelectedCurrencies
+          currencies={selectedCurrencies}
+          onChange={this.onCurrencyChanged}
+        />
+        <AvailableCurrencies onChange={this.onCurrencyChanged} currencies={currencies} />
       </div>
-    )
+    );
   }
 }
 
@@ -63,29 +68,35 @@ export class SelectedCurrencies extends React.Component<
   SelectedCurrenciesProps
 > {
   render() {
-    return <div className={styles['selectedCurrencies']}>
-      {this.props.currencies.map((c) => (
-        <SelectedCurrencyComponent
-          isoCurrency={c.isoCurrency}
-          onDeselect={() => this.props.onChange(c, false)}
-        />
-      ))}
-    </div>
+    const { currencies, onChange } = this.props;
+    return (
+      <div className={styles["selectedCurrencies"]}>
+        {currencies.length > 0 ? currencies.map((c) => (
+          <SelectedCurrencyComponent
+            key={c.isoCurrency}
+            isoCurrency={c.isoCurrency}
+            onDeselect={() => onChange(c, false)}
+          />
+        )): (
+          <div className={styles["emptyCurrencies"]}>Select currencies below</div>
+        )
+      }
+      </div>
+    );
   }
 }
 
-export const AvailableCurrencies: React.FC<CurrencySelectionState> = props => {
-  const { currencies } = props
+export const AvailableCurrencies: React.FC<SelectedCurrenciesProps> = (props) => {
+  const { currencies, onChange } = props;
   return (
-    <div className={styles['availableCurrencies']}>
-      {currencies.map(currency => (
+    <div className={styles["availableCurrencies"]}>
+      {currencies.map((currency) => (
         <CurrencyComponent
           key={currency.isoCurrency}
-          selected={currency.selected}
-          isoCurrency={currency.isoCurrency}
-          onChange={() => console.log()}
+          currency={currency}
+          onChange={onChange}
         />
       ))}
     </div>
-  )
-}
+  );
+};

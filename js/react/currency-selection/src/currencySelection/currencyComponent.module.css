@@ -1,23 +1,23 @@
 .currency {
-    position: relative;
-    margin: 0.6em;
-    padding: 0.6em;
-    background-color: #ababab;
-    height: 1.2em;
+    cursor: pointer;
+    border: 1px solid #232323;
+    display: flex;
+    margin: 0.2em;
+    padding: 0.2em;
+    background-color: #ececec;
+    width: 5.5em;
+    height: 1em;
 }
 
-.deselect {
-    position: absolute;
-    border-radius: 50%;
-    width: 1.1em;
-    height: 1.1em;
-    top: 0;
-    right: 0;
-    color: #fff;
-    font-size: 0.7em;
-    background-color: #000;
+.currency:hover {
+    background-color: #bdbdbd;
+}
+
+.currency input {
+    margin: 0 0.3em;
 }
 
 .title {
     color: #000;
+    line-height: 0.9em;
 }

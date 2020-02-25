@@ -1,5 +1,5 @@
 import * as styles from "./currencyComponent.module.css";
-import React, { useState, } from "react";
+import React from "react";
 
 export enum IsoCurrency {
   EUR = "EUR",
@@ -18,43 +18,22 @@ export interface Currency {
   isoCurrency: IsoCurrency;
 }
 
-export interface SelectedCurrencyComponentProps {
-  isoCurrency: IsoCurrency;
-  onDeselect: () => void;
-}
-
 export interface CurrencyComponentProps {
-  selected: boolean;
-  isoCurrency: IsoCurrency;
-  onChange: () => void;
+  currency: Currency;
+  onChange: (currency: Currency, selected: boolean) => void;
 }
 
 export const CurrencyComponent: React.FC<CurrencyComponentProps> = (props) => {
+  const { currency, onChange } = props;
   return (
-    <div className={styles["currency"]}>
+    <div className={styles["currency"]} onClick={() => onChange(currency, !currency.selected)}>
       <input
         name="isSelected"
         type="checkbox"
-        checked={props.selected}
-        onChange={props.onChange}
+        checked={currency.selected}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(currency, e.target.checked)}
       />
-      <div className={styles.title}>{props.isoCurrency}</div>
-      {props.selected && (
-        <div className={styles["deselect"]} onClick={props.onChange}>
-          X
-        </div>
-      )}
-    </div>
-  );
-};
-
-export const SelectedCurrencyComponent: React.FC<SelectedCurrencyComponentProps> = (props) => {
-  return (
-    <div className={styles["currency"]}>
-      <div className={styles.title}>{props.isoCurrency}</div>
-      <div className={styles["deselect"]} onClick={props.onDeselect}>
-        X
-      </div>
+      <div className={styles.title}>{currency.isoCurrency}</div>
     </div>
   );
 };

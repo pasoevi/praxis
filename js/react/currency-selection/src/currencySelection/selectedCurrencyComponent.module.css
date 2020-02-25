@@ -1,0 +1,39 @@
+.currency {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin: 0.2em;
+    padding: 0.2em;
+    background-color: #ececec;
+    width: 5.5em;
+    height: 1em;
+}
+
+.currency input {
+    margin: 0 0.3em;
+}
+
+.deselect {
+    position: absolute;
+    border-radius: 50%;
+    width: 1.1em;
+    height: 1.1em;
+    top: 0;
+    right: 0;
+    color: #fff;
+    font-size: 0.7em;
+    line-height: 1em;
+    background-color: #000;
+}
+
+.deselect:hover {
+    color: #000;
+    border: 1px solid #000;
+    background-color: #fff;
+}
+
+.title {
+    color: #000;
+    line-height: 0.9em;
+}

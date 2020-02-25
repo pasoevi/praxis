@@ -1,5 +1,5 @@
 .currencySelection {
-    margin: 5rem;
+    margin: 1em;
     border: 1px solid #ccc;
     box-shadow: 2px 2px 5px #888;
     width: 20em;
@@ -7,6 +7,16 @@
 
 .selectedCurrencies {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    min-height: 2em;
+    text-align: center;
+}
+
+.emptyCurrencies {
+    width: 100%;
+    text-align: center;
 }
 
 .availableCurrencies {
