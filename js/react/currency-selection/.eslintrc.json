@@ -1,0 +1,52 @@
+{
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier/@typescript-eslint",
+      "plugin:prettier/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    ],
+    "plugins": ["react", "@typescript-eslint", "prettier"],
+    "env": {
+      "browser": true,
+      "jasmine": true,
+      "jest": true
+    },
+    "rules": {
+      "prettier/prettier": ["error", {
+        "doubleQuote": true,
+        "arrow-parens": "always"
+      }],
+      "no-console": "error",
+      "semi": ["error", "always"],
+      "react/prop-types": 0,
+      "sort-imports": ["error", {
+        "ignoreCase": false,
+        "ignoreDeclarationSort": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+      }],
+      "comma-dangle": [
+        "error", {
+          "arrays": "always",
+          "objects": "always",
+          "imports": "always",
+          "exports": "always"
+        }
+      ],
+      "arrow-parens": ["error", "always"]
+    },
+    "settings": {
+      "react": {
+        "pragma": "React",
+        "version": "detect"
+      }
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    }
+  }
