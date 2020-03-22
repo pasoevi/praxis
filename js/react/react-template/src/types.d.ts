@@ -10,6 +10,12 @@ declare module "*.pcss" {
     export = mapping;
 }
 
+declare module "*.scss" {
+    type CssModuleMapping = { [key: string]: string };
+    const mapping: CssModuleMapping;
+    export = mapping;
+}
+
 declare module "*.png" {
     const path: string;
     export = path;
