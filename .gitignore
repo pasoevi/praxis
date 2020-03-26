@@ -250,3 +250,5 @@ compiled
 
 # Javascript
 node_modules
+
+*.exe
