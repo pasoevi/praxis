@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/usr/bin/python3.6"
+    "python.pythonPath": "C:\\Users\\spaso\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+    "cmake.configureOnOpen": false
 }
