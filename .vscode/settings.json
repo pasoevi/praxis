@@ -1,4 +1,6 @@
 {
     "python.pythonPath": "C:\\Users\\spaso\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "prettier.tabWidth": 4,
+    "prettier.trailingComma": "all"
 }
