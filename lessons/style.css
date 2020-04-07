@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    font-family: 'Montserrat', 'sans-serif';
+}
+
+li {
+    list-style-type: none;
+    border-radius: 0.5em;
+    padding: 1em;
+}
+
+.word-list li {
+    border: 1px solid #c22;
+    margin: 0.8em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.word-list span {
+    border: 1px solid #458;
+    padding: 0.3em;
+    margin: 0.3em;
+}
+
+.label-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.label-list li {
+    border: 1px solid #49d;
+    display: inline-block;
+    margin: 0.2em;
+}
