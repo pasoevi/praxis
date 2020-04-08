@@ -47,7 +47,7 @@ obj.bar();
 /* Wednesday */
 
 let yogurt = "Greek";
-joke = new Promise(resolve, reject) {
+let joke = new Promise(resolve, reject) {
   setTimeout(function () {
     reslove(4);
   })
@@ -124,4 +124,25 @@ findTheOne();
 
 
 // Factorial
-4! = 1 * 2 * 3 * 4 
+// 4! = 1 * 2 * 3 * 4
+
+
+let number = 3;
+
+for (let i = 1; i <= number; i++) {
+    let line = "";
+    let j = 1;
+    if (i % 2) {
+        while(j <= number - i + 1) {
+            line += j.toString();
+            j++;
+        }
+    } else {
+        j = i;
+        while(j > 0 ) {
+        line += j.toString();
+        j--;
+        }
+    }
+    console.log(line);
+}

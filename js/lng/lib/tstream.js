@@ -1,53 +1,46 @@
-"use strict";
+export function tokenStream(input) {
+    let current = null;
+    let keywords = " if then else lambda λ true false ";
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.tokenStream = tokenStream;
-function tokenStream(input) {
-    var current = null;
-    var keywords = " if then else lambda λ true false ";
-
-    var is_keyword = function is_keyword(x) {
+    const is_keyword = function (x) {
         return keywords.indexOf(" " + x + " ") >= 0;
     };
 
-    var is_digit = function is_digit(ch) {
+    const is_digit = function (ch) {
         return (/[0-9]/i.test(ch)
         );
     };
 
-    var is_id_start = function is_id_start(ch) {
+    const is_id_start = function (ch) {
         return (/[a-zλ_]/i.test(ch)
         );
     };
 
-    var is_id = function is_id(ch) {
+    const is_id = function (ch) {
         return is_id_start(ch) || "?!-<>=0123456789".indexOf(ch) >= 0;
     };
 
-    var is_op_char = function is_op_char(ch) {
+    const is_op_char = function (ch) {
         return "+-*/%=&|<>!".indexOf(ch) >= 0;
     };
 
-    var is_punc = function is_punc(ch) {
+    let is_punc = function (ch) {
         return ",;(){}[]".indexOf(ch) >= 0;
     };
 
-    var is_whitespace = function is_whitespace(ch) {
+    let is_whitespace = function (ch) {
         return " \t\n".indexOf(ch) >= 0;
     };
 
-    var read_while = function read_while(predicate) {
-        var str = "";
-        while (!input.eof() && predicate(input.peek())) {
-            str += input.next();
-        }return str;
+    let read_while = function (predicate) {
+        let str = "";
+        while (!input.eof() && predicate(input.peek())) str += input.next();
+        return str;
     };
 
-    var read_number = function read_number() {
-        var has_dot = false;
-        var number = read_while(function (ch) {
+    let read_number = function () {
+        let has_dot = false;
+        let number = read_while(function (ch) {
             if (ch == ".") {
                 if (has_dot) return false;
                 has_dot = true;
@@ -58,20 +51,20 @@ function tokenStream(input) {
         return { type: "num", value: parseFloat(number) };
     };
 
-    var read_ident = function read_ident() {
-        var id = read_while(is_id);
+    let read_ident = function () {
+        let id = read_while(is_id);
         return {
             type: is_keyword(id) ? "kw" : "var",
             value: id
         };
     };
 
-    var read_escaped = function read_escaped(end) {
-        var escaped = false,
+    let read_escaped = function (end) {
+        let escaped = false,
             str = "";
         input.next();
         while (!input.eof()) {
-            var ch = input.next();
+            let ch = input.next();
             if (escaped) {
                 str += ch;
                 escaped = false;
@@ -86,20 +79,20 @@ function tokenStream(input) {
         return str;
     };
 
-    var read_string = function read_string() {
+    let read_string = function () {
         return { type: "str", value: read_escaped('"') };
     };
-    var skip_comment = function skip_comment() {
+    let skip_comment = function () {
         read_while(function (ch) {
             return ch != "\n";
         });
         input.next();
     };
 
-    var read_next = function read_next() {
+    let read_next = function () {
         read_while(is_whitespace);
         if (input.eof()) return null;
-        var ch = input.peek();
+        let ch = input.peek();
         if (ch == "#") {
             skip_comment();
             return read_next();
@@ -118,24 +111,24 @@ function tokenStream(input) {
         input.croak("Can't handle character: " + ch);
     };
 
-    var peek = function peek() {
+    let peek = function () {
         return current || (current = read_next());
     };
 
-    var next = function next() {
-        var tok = current;
+    let next = function () {
+        let tok = current;
         current = null;
         return tok || read_next();
     };
 
-    var eof = function eof() {
+    let eof = function () {
         return peek() == null;
     };
 
     return Object.freeze({
-        next: next,
-        peek: peek,
-        eof: eof,
+        next,
+        peek,
+        eof,
         croak: input.croak
     });
 };
