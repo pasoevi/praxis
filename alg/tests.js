@@ -69,3 +69,6 @@ function encrypt(string) {
     }
     return result;
 }
+
+
+

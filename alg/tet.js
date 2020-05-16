@@ -1,2 +1,2 @@
-let example = 10 * "s";
-console.log(example)
+const [head, ...rest] = "s";
+console.log(rest);
