@@ -3,38 +3,29 @@
  * @return {number}
  */
 var countSquares = function (matrix) {
-    let result = 0;
-    const rowCount = matrix.length;
+    let dp = matrix;
 
-    if (rowCount < 1) {
+    let rowCount = matrix.length;
+    if (rowCount === 0) {
         return 0;
     }
-    const columnCount = matrix[0].length;
-    const maxSubMatrixSize = Math.min(columnCount, rowCount);
+    let columnCount = matrix[0].length;
 
-    for (
-        let subMatrixSize = 1;
-        subMatrixSize <= maxSubMatrixSize;
-        subMatrixSize++
-    ) {
-        for (let top = 0; top + subMatrixSize <= rowCount; top++) {
-            for (let left = 0; left + subMatrixSize <= columnCount; left++) {
-                let allOnes = true;
-                for (let row = top; row < top + subMatrixSize; row++) {
-                    for (
-                        let column = left;
-                        column < left + subMatrixSize;
-                        column++
-                    ) {
-                        if (matrix[row][column] !== 1) {
-                            allOnes = false;
-                        }
-                    }
-                }
-                if (allOnes) {
-                    result++;
-                }
-            }
+    for (let row = 1; row < rowCount; row++) {
+        for (let column = 1; column < columnCount; column++) {
+            dp[row][column] *=
+                Math.min(
+                    dp[row - 1][column],
+                    dp[row][column - 1],
+                    dp[row - 1][column - 1],
+                ) + 1;
+        }
+    }
+
+    let result = 0;
+    for (let row = 0; row < rowCount; row++) {
+        for (let column = 0; column < columnCount; column++) {
+            result += dp[row][column];
         }
     }
 
