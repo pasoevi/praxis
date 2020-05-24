@@ -10,7 +10,10 @@ export interface ChatProps {
 
 export const Chat: React.FC<ChatProps> = (props) => {
     const dispatch = useDispatch();
-    const messages: Message[] = useSelector((state: AppState) => state.chat.messages);
+    const messages: Message[] = useSelector(
+        (state: AppState) => state.chat.messages,
+    );
+    console.log(messages);
     return (
         <div className="chat">
             {messages.map((m) => (

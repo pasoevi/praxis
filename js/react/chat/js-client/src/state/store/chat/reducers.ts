@@ -10,21 +10,18 @@ const mockMessages: Message[] = [
     {
         id: "1",
         author: "Sergo Pasoevi",
-        dateSent: new Date(),
         timestamp: Date.now(),
         text: "Do you want to bang tonight?",
     },
     {
         id: "2",
         author: "Sergo Pasoevi",
-        dateSent: new Date(),
         timestamp: Date.now(),
         text: "Do you want to bang tonight?",
     },
     {
         id: "3",
         author: "You",
-        dateSent: new Date(),
         timestamp: Date.now(),
         text: "Do you want to bang tonight?",
     },
@@ -34,14 +31,32 @@ const initialState: ChatState = {
     messages: mockMessages,
 };
 
+function uuidv4() {
+   var dt = new Date().getTime();
+   var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (
+       c,
+   ) {
+       var r = (dt + Math.random() * 16) % 16 | 0;
+       dt = Math.floor(dt / 16);
+       return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
+   });
+   return uuid;
+}
+
 export function chatReducer(
     state = initialState,
     action: ChatActionTypes,
 ): ChatState {
     switch (action.type) {
         case SEND_MESSAGE:
+            const newMessage: Message = {
+                id: uuidv4(),
+                author: "Sergo Pasoevi",
+                text: action.payload,
+                timestamp: Date.now(),
+            };
             return {
-                messages: [...state.messages, action.payload],
+                messages: [...state.messages, newMessage],
             };
         case DELETE_MESSAGE:
             return {
