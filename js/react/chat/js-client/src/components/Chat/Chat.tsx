@@ -4,9 +4,7 @@ import { MessageComponent } from "../Message/Message";
 import { AppState } from "../../state/store";
 import { Message } from "../../state/store/chat/types";
 
-export interface ChatProps {
-
-}
+export interface ChatProps {}
 
 export const Chat: React.FC<ChatProps> = (props) => {
     const messages: Message[] = useSelector(

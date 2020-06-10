@@ -5,7 +5,7 @@ function get_commit {
 }
 
 ROOT_COMMIT=$(get_commit)
-SUBDIR_COMMIT=$(get_commit js/react/chat)
+SUBDIR_COMMIT=$(get_commit chat)
 
 if [ "$SUBDIR_COMMIT" == "$ROOT_COMMIT" ]; then
     echo "Files changes"
