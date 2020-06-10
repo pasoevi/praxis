@@ -1,4 +1,5 @@
 import React from "react";
+//@ts-ignore
 import { WithFigma } from "storybook-addon-figma";
 import App from "../App";
 

@@ -1,4 +1,4 @@
-// test-utils.js
+// @ts-ignore
 import React from "react";
 import { render as rtlRender } from "@testing-library/react";
 import { createStore } from "redux";
@@ -10,16 +10,19 @@ const initialRootState = {};
 function render(
     element: React.ReactElement,
     {
+        //@ts-ignore
         initialState = initialRootState,
         store = createStore(reducer, initialState),
         ...renderOptions
     } = {},
 ) {
-    function Wrapper({ children }) {
-        return <Provider store={store}>{children}</Provider>;
-    }
-    return rtlRender(element, { wrapper: Wrapper, ...renderOptions });
-}
+      //@ts-ignore
+      function Wrapper({ children }) {
+          return <Provider store={store}>{children}</Provider>;
+      }
+      //@ts-ignore
+      return rtlRender(element, { wrapper: Wrapper, ...renderOptions });
+  }
 
 // re-export everything
 export * from "@testing-library/react";

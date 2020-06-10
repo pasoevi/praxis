@@ -1,4 +1,4 @@
-import { Message } from "./store/chat/types";
+import { Message } from "./chat/types";
 import { Dispatch } from "react";
 import { temporaryAny } from "../types";
 
