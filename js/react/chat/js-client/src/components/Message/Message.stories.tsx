@@ -1,5 +1,6 @@
 import React from "react";
 import { MessageComponent } from "./Message";
+// @ts-ignore: Unreachable code error
 import { WithFigma } from "storybook-addon-figma";
 
 export default {
