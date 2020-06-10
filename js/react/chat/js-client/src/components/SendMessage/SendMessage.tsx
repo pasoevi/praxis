@@ -1,4 +1,9 @@
-import React, { FunctionComponent, useState, ChangeEvent, FormEvent } from "react";
+import React, {
+    FunctionComponent,
+    useState,
+    ChangeEvent,
+    FormEvent,
+} from "react";
 import { useDispatch } from "react-redux";
 import { sendMessage } from "../../store/chat/actions";
 
@@ -6,11 +11,14 @@ interface SendMessageProps {
     message?: string;
 }
 
-export const SendMessage: FunctionComponent<SendMessageProps> = ({
-    message: message = "",
-}) => {
+const defaultProps: SendMessageProps = {
+    message: "",
+};
+
+export const SendMessage: FunctionComponent<SendMessageProps> = (props) => {
     const dispatch = useDispatch();
-    const [messageText, setMessageText] = useState(message);
+    const { message } = props;
+    const [messageText, setMessageText] = useState(message ?? "");
 
     function handleTextInputChange(e: ChangeEvent<HTMLInputElement>) {
         setMessageText(e.target.value);
@@ -26,7 +34,11 @@ export const SendMessage: FunctionComponent<SendMessageProps> = ({
             <label>
                 <input type="text" onChange={handleTextInputChange} />
             </label>
-            <button type="submit" value="Send">Send</button>
+            <button type="submit" value="Send">
+                Send
+            </button>
         </form>
     );
 };
+
+SendMessage.defaultProps = defaultProps;
