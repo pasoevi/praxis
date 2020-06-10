@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, ChangeEvent, FormEvent } from "react";
 import { useDispatch } from "react-redux";
-import { sendMessage } from "../../state/store/chat/actions";
+import { sendMessage } from "../../store/chat/actions";
 
 interface SendMessageProps {
     message?: string;

@@ -1,6 +1,6 @@
 import React from "react";
 import * as styles from "./Message.module.scss";
-import { Message } from "../../state/store/chat/types";
+import { Message } from "../../store/chat/types";
 
 export interface MessageProps {
     message: Message;
