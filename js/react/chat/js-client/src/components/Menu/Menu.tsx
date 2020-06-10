@@ -9,5 +9,5 @@ export const Menu: React.FC<MenuProps> = (props) => {
     return <div className={styles.menu}>
         <div>Chat</div>
         <div>Settings</div>
-    </div>
-}
+    </div>;
+};

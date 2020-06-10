@@ -1,5 +1,5 @@
-module.exports = {
-    "env": {
+{
+     "env": {
         "browser": true,
         "es6": true,
         "node": true
@@ -9,10 +9,6 @@ module.exports = {
         "plugin:react/recommended",
         "plugin:@typescript-eslint/eslint-recommended"
     ],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
@@ -43,4 +39,4 @@ module.exports = {
             "always"
         ]
     }
-};
+}
