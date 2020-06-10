@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { MessageComponent } from "../Message/Message";
 import { AppState } from "../../store";
-import { Message } from "../../chat/types";
+import { Message } from "../../store/chat/types";
 
 export interface ChatProps {}
 
