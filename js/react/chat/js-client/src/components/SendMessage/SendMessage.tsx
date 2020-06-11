@@ -1,5 +1,4 @@
 import React, {
-    FunctionComponent,
     useState,
     ChangeEvent,
     FormEvent,
@@ -15,7 +14,7 @@ const defaultProps: SendMessageProps = {
     message: "",
 };
 
-export const SendMessage: FunctionComponent<SendMessageProps> = (props) => {
+export const SendMessage: React.FC<SendMessageProps> = (props) => {
     const dispatch = useDispatch();
     const { message } = props;
     const [messageText, setMessageText] = useState(message ?? "");

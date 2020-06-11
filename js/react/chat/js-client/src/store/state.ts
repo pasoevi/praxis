@@ -1,5 +1,4 @@
 import { Message } from "./chat/types";
-import { Dispatch } from "react";
 import { temporaryAny } from "../types";
 
 // Actions
@@ -25,26 +24,12 @@ const defaultAction: Action = {
     type: "default",
 };
 
-// Reducer
-export default function reducer(state = {}, action = defaultAction) {
-    switch (action.type) {
-        default:
-            return state;
-    }
-}
 
 // Action Creators
 export function loadMessages() {
     return { type: LOAD };
 }
 
-export function sendMessage(message: Message) {
-    return { type: SEND, widget: message };
-}
-
-export function updateWidget(message: Message) {
-    return { type: RECEIVE, widget: message };
-}
 
 // side effects, only as applicable
 // e.g. thunks, epics, etc
@@ -52,5 +37,5 @@ export function receiveMessages() {
     return (dispatch: temporaryAny) =>
         fetch("/messages")
             .then((res) => res.json())
-            .then((message: Message) => dispatch(updateWidget(message)));
+            .then((message: Message) => dispatch(loadMessages()));
 }

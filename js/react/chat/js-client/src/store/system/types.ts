@@ -1,8 +1,15 @@
+export const CURRENT_USER_ID = "0";
+
+export interface User {
+  id: string;
+  displayName: string;
+}
+
 // Describing the shape of the system's slice of state
 export interface SystemState {
   loggedIn: boolean;
   session: string;
-  userName: string;
+  currentUser: User;
 }
 
 // Describing the different ACTION NAMES available

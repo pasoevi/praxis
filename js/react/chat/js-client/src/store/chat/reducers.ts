@@ -5,11 +5,12 @@ import {
     ChatActionTypes,
     Message,
 } from "./types";
+import { v4 } from "node-uuid";
 
 const mockMessages: Message[] = [
     {
         id: "1",
-        author: "Sergo Pasoevi",
+        sender: {id: v4(), displayName: "Sergo Pasoevi"},
         timestamp: Date.now(),
         text: "Do you want to bang tonight?",
     }/* ,
@@ -31,19 +32,6 @@ const initialState: ChatState = {
     messages: mockMessages,
 };
 
-function uuidv4() {
-    let dt = new Date().getTime();
-    const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-        /[xy]/g,
-        function (c) {
-            const r = (dt + Math.random() * 16) % 16 | 0;
-            dt = Math.floor(dt / 16);
-            return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
-        },
-    );
-    return uuid;
-}
-
 export function chatReducer(
     state = initialState,
     action: ChatActionTypes,
@@ -51,10 +39,10 @@ export function chatReducer(
     switch (action.type) {
     case SEND_MESSAGE: {
         const newMessage: Message = {
-            id: uuidv4(),
-            author: "Sergo Pasoevi",
-            text: action.payload,
-            timestamp: Date.now(),
+            id: action.payload.id,
+            sender: action.payload.sender,
+            text: action.payload.text,
+            timestamp: action.payload.timestamp,
         };
         return {
             messages: [...state.messages, newMessage],

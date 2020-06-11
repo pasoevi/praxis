@@ -1,6 +1,7 @@
 import React from "react";
 import { MessageComponent } from "./Message";
 import { withKnobs, text as knobText } from "@storybook/addon-knobs";
+import { v4 } from "node-uuid";
 
 export default {
     title: "Chat message",
@@ -10,7 +11,7 @@ export default {
 
 const msgData = {
     id: "87sd87s8df787sd98f7sd9f",
-    author: "Sergo Pasoevi",
+    sender: {id: v4(), displayName: "Sergo Pasoevi"},
     timestamp: Date.now(),
 };
 

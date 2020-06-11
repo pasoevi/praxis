@@ -1,9 +1,13 @@
+import { v4 } from "node-uuid";
 import { UPDATE_SESSION, SystemState, SystemActionTypes } from "./types";
 
 const initialState: SystemState = {
   loggedIn: false,
   session: "",
-  userName: ""
+  currentUser: {
+    id: v4(),
+    displayName: "You"
+  }
 };
 
 export function systemReducer(

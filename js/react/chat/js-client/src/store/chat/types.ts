@@ -1,6 +1,8 @@
+import { User } from "../system/types";
+
 export interface Message {
     id: string;
-    author: string;
+    sender: User;
     text: string;
     timestamp: number;
 }
@@ -15,7 +17,7 @@ export const DELETE_MESSAGE = "DELETE_MESSAGE";
 
 interface SendMessageAction {
   type: typeof SEND_MESSAGE;
-  payload: string;
+  payload: Message;
 }
 
 interface DeleteMessageAction {
