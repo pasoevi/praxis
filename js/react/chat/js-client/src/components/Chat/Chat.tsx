@@ -13,7 +13,7 @@ export const Chat: React.FC<ChatProps> = (props) => {
     return (
         <div className="chat">
             {messages.map((m) => (
-                <MessageComponent message={m} key={m.id} />
+                <MessageComponent {...m} key={m.id} />
             ))}
         </div>
     );
