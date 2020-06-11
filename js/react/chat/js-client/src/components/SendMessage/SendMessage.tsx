@@ -26,13 +26,14 @@ export const SendMessage: FunctionComponent<SendMessageProps> = (props) => {
 
     function handleSendMessage(e: FormEvent<HTMLFormElement>) {
         dispatch(sendMessage(messageText));
+        setMessageText("");
         e.preventDefault();
     }
 
     return (
         <form onSubmit={handleSendMessage}>
             <label>
-                <input type="text" onChange={handleTextInputChange} />
+                <input type="text" value={messageText} onChange={handleTextInputChange} />
             </label>
             <button type="submit" value="Send">
                 Send
