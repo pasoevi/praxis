@@ -1,9 +1,6 @@
-import React, {
-    useState,
-    ChangeEvent,
-    FormEvent,
-} from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useDispatch } from "react-redux";
+import styles from "./SendMessage.module.scss";
 import { sendMessage } from "../../store/chat/actions";
 
 interface SendMessageProps {
@@ -30,9 +27,13 @@ export const SendMessage: React.FC<SendMessageProps> = (props) => {
     }
 
     return (
-        <form onSubmit={handleSendMessage}>
+        <form className={styles.sendMessage} onSubmit={handleSendMessage}>
             <label>
-                <input type="text" value={messageText} onChange={handleTextInputChange} />
+                <input
+                    type="textarea"
+                    onChange={handleTextInputChange}
+                    value={messageText}
+                />
             </label>
             <button type="submit" value="Send">
                 Send

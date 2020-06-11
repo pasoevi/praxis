@@ -5,13 +5,13 @@
 	display: table;
     // width: 10em;
     padding: 0.5em;
-    margin: 1.8em;
+    margin: 1.8em 0.5em;
 
     &:after {
         content: "";
         position: absolute;
         top: 0;
-        left: 15%;
+        left: 10%;
         width: 0;
         height: 0;
         border: 0.844em solid transparent;
@@ -29,7 +29,7 @@
     }
 
     &.sent:after {
-        left: 50%;
+        left: 75%;
         width: 0;
         height: 0;
         border: 0.625em solid transparent;
