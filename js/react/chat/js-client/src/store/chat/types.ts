@@ -4,6 +4,7 @@ export interface Message {
     text: string;
     timestamp: number;
 }
+
 export interface ChatState {
   messages: Message[];
 }

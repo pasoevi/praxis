@@ -6,10 +6,7 @@ import { SendMessage } from "./components/SendMessage/SendMessage";
 export default function App() {
     return (
         <div className="App">
-            <span>Something</span>
-            <p>Some paragraph</p>
-            <a href="https://gnu.org">Gnu website</a>
-            <Chat/>
+            <Chat />
             <SendMessage />
         </div>
     );

@@ -16,7 +16,6 @@ export const rootReducer = combineReducers({
     chat: chatReducer,
 });
 
-
 export type AppState = ReturnType<typeof store.getState>;
 
 export type AppThunk<ReturnType = void> = ThunkAction<

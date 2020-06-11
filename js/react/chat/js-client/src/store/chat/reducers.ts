@@ -12,7 +12,7 @@ const mockMessages: Message[] = [
         author: "Sergo Pasoevi",
         timestamp: Date.now(),
         text: "Do you want to bang tonight?",
-    },
+    }/* ,
     {
         id: "2",
         author: "Sergo Pasoevi",
@@ -24,7 +24,7 @@ const mockMessages: Message[] = [
         author: "You",
         timestamp: Date.now(),
         text: "Do you want to bang tonight?",
-    },
+    } */,
 ];
 
 const initialState: ChatState = {
