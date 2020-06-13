@@ -2,9 +2,13 @@
     "name": "server",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "dist/index.js",
     "scripts": {
-        "start": "node index.js",
+        "build": "tsc",
+        "watch-ts": "tsc -w",
+        "watch-node": "nodemon dist/index.js",
+        "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript, Node\" -c \"yello.bold, cyan.bold\" \"yarn run watch-ts\" \"yarn run watch-node\"",
+        "start": "node dist/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
@@ -12,9 +16,12 @@
     "license": "ISC",
     "devDependencies": {
         "@types/node": "^14.0.1",
+        "concurrently": "^5.2.0",
+        "nodemon": "^2.0.4",
         "typescript": "^3.9.2"
     },
     "dependencies": {
+        "express": "^4.17.1",
         "socket.io": "^2.3.0"
     }
 }

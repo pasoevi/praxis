@@ -246,9 +246,11 @@ ModelManifest.xml
 .fake/
 
 compiled
-
+build
+dist
 
 # Javascript
 node_modules
 
 *.exe
+js/react/chat/server/dist/
