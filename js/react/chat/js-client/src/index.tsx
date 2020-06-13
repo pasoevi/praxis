@@ -1,12 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import * as Sentry from "@sentry/browser";
 import { Provider } from "react-redux";
 import "./index.scss";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { store } from "./store";
+import { init as initWS } from "./engine/websockets";
+
+initWS(store);
 
 const rootElement = document.getElementById("root");
+
+Sentry.init({
+    dsn:
+        "https://d964005f348340158006751922530bf6@o406571.ingest.sentry.io/5274291",
+});
 
 ReactDOM.render(
     <Provider store={store}>

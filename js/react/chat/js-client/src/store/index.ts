@@ -10,6 +10,13 @@ import { combineReducers } from "@reduxjs/toolkit";
 
 import { systemReducer } from "./system/reducers";
 import { chatReducer } from "./chat/reducers";
+import { loadState, saveState } from "../localStorage/localStorage";
+import { Message } from "../components/Message/Message.stories";
+
+// Actions
+const defaultAction: Action = {
+    type: "default",
+};
 
 export const rootReducer = combineReducers({
     system: systemReducer,
@@ -25,7 +32,15 @@ export type AppThunk<ReturnType = void> = ThunkAction<
     Action<string>
 >;
 
+const persistedState = loadState();
+
 export const store = configureStore({
     reducer: rootReducer,
-    middleware: [loggerMiddleware, ...getDefaultMiddleware()],
+    middleware: [...getDefaultMiddleware(), loggerMiddleware],
+    devTools: process.env.NODE_ENV !== "production",
+    preloadedState: persistedState,
+});
+
+store.subscribe(() => {
+    saveState(store.getState());
 });
