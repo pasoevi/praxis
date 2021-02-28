@@ -1,0 +1,10 @@
+sudo dumpkeys | head -1 > /usr/share/keymaps/Caps2Ctrl.map
+
+keycode 58 = Control #This makes Caps act as Ctrl
+ # keycode 29 = Caps_Lock #This makes Ctrl act as Caps
+ # alt_is_meta #This fixes the Alt key
+
+sudo loadkeys /usr/share/keymaps/Caps2Ctrl.map
+
+
+sudo loadkeys -d #load default keymap file
